@@ -129,13 +129,12 @@ for expert mathematical peer review.
 
 ## Authorship, automation, and review
 
-Aakash Gurung directed the mathematical project and is responsible for the
-result.  The mathematical exploration and manuscript preparation used an
-AI-assisted pipeline involving OpenAI ChatGPT and Codex.  Aristotle (Harmonic)
-produced and extended the Lean development through iterative prompts and
-compiler feedback.  Codex independently extracted and rebuilt the supplied
-archive, checked the theorem and assumption boundary, and prepared this
-Palomar layout.  No independent human expert Lean review is claimed.
+Aakash Gurung directed the project and takes responsibility for the
+mathematical result.  Mathematical exploration, manuscript preparation, and
+Lean formalization were AI-assisted using OpenAI ChatGPT, Codex, and Aristotle
+(Harmonic).  The resulting formalization was rebuilt and audited for
+compilation, theorem scope, and assumptions.  No independent human expert Lean
+review has yet been conducted.
 
 ## Licence
 
