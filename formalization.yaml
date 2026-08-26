@@ -1,0 +1,201 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/formalization.schema.json
+version: "v0.4"
+
+project:
+  name: "Factorial-residue hypergraphs and an auxiliary problem of Erdos"
+  description: >-
+    A Lean 4 formalization of a quantitative solution to the auxiliary problem
+    suggested by Erdos alongside Problem 1059. Conditional on an explicitly
+    stated standard dimension-one upper-bound sieve theorem, the formalization
+    proves that for every sufficiently large L there are at least
+    ((L+1)!)^eta/(100 log L) integers n in (2L!, (L+1)!] whose prime factors
+    all exceed L and for which n-k! is composite for every 1 <= k <= L. The
+    formalization does not prove that n is prime and therefore does not solve
+    the original Erdos prime problem.
+  authors:
+    - "Aakash Gurung"
+  license: "Apache-2.0"
+  responsible_maintainers:
+    - "Aakash Gurung"
+
+classification:
+  arxiv: [math.NT, math.CO]
+  msc2020: [11N36, 11B65, 11A41, 05C65]
+
+sources:
+  - title: "Factorial-residue hypergraphs and an auxiliary problem of Erdos"
+    authors:
+      - "Aakash Gurung"
+    type: paper
+    location: "paper/factorial_residue_hypergraphs.tex"
+    relationship: formalizes
+    note: >-
+      This repository formalizes the manuscript's quantitative auxiliary
+      theorem. The Lean theorem carries the standard upper-bound sieve as an
+      explicit hypothesis because the fundamental lemma is not in the pinned
+      Mathlib release.
+    license: "Apache-2.0"
+    author_endorsement: participated
+  - title: "Unsolved Problems in Number Theory, third edition, Problem A2"
+    authors:
+      - "Richard K. Guy"
+    id: "https://doi.org/10.1007/978-0-387-26677-0"
+    type: book
+    location: "https://link.springer.com/book/10.1007/978-0-387-26677-0"
+    relationship: background
+    note: >-
+      Records Erdos Problem 1059 and the related auxiliary problem addressed
+      by the manuscript and formalization.
+    author_endorsement: n/a
+  - title: "The Distribution of Prime Numbers"
+    authors:
+      - "Dimitris Koukoulopoulos"
+    id: "https://doi.org/10.1090/gsm/203"
+    type: book
+    location: "https://dms.umontreal.ca/~koukoulo/documents/publications/primes.pdf"
+    relationship: background
+    note: >-
+      The explicit Lean hypothesis UpperBoundSieveDimOne is source-matched to
+      Theorem 18.11(a), specialized to sieve dimension one and u=10. The
+      detailed comparison is in docs/SIEVE_SOURCE_AUDIT.md.
+    author_endorsement: n/a
+  - title: "Erdos Problem 1059"
+    authors:
+      - "Thomas F. Bloom"
+    id: "https://www.erdosproblems.com/1059"
+    type: web discussion
+    location: "https://www.erdosproblems.com/1059"
+    relationship: background
+    note: >-
+      Gives the current statement and status of the original prime problem;
+      that problem is not claimed here.
+    author_endorsement: n/a
+
+related_formalizations: []
+
+status:
+  scope: >-
+    The compared declaration formalizes the manuscript's quantitative
+    auxiliary theorem. It is conditional on the explicit proposition
+    UpperBoundSieveDimOne, a source-matched finite weighted form of the
+    dimension-one upper-bound sieve; the fundamental lemma itself is not
+    proved in Lean. All problem-specific arguments downstream of that theorem
+    are formalized. The large-prime-factor intermediate estimate used by the
+    final proof has threshold constant 1/40 instead of the manuscript's 1/8;
+    this changes only a sufficiently-large-L threshold and not the compared
+    conclusion. The original prime form of Erdos Problem 1059 remains open and
+    is outside the formalized claim.
+  sorry_count: 0
+  sorry_in_definitions: 0
+  axioms: [propext, Classical.choice, Quot.sound]
+  main_results:
+    - declaration: "FactorialHypergraph.Palomar.quantitative_auxiliary_erdos"
+      module: "Solution"
+      summary: >-
+        A quantitative lower bound for L-rough integers in a factorial
+        interval whose differences from every relevant factorial are
+        composite, conditional on UpperBoundSieveDimOne.
+
+automation:
+  methods:
+    - method: agent
+      models: ["Aristotle (Harmonic)"]
+      framework: "Aristotle"
+      tool_setup: >-
+        Iterative AI-assisted Lean formalization with compiler feedback,
+        dependency tracking, source-interface auditing, and axiom reports.
+      cost:
+        wall_time: "multiple sessions; not reconstructed"
+        spend_usd: "not tracked"
+        hardware: "hosted Aristotle service"
+      prompting_notes: >-
+        Prompts isolated named analytic inputs, required exact statement
+        preservation, and forbade sorry, admit, custom axioms, and hidden
+        theorem assumptions.
+    - method: agent
+      models: ["OpenAI ChatGPT 5.6 Sol Pro", "OpenAI Codex"]
+      framework: "AI-assisted open-problem and verification workflow"
+      tool_setup: >-
+        Mathematical exploration and manuscript development used ChatGPT and
+        Codex; Codex independently extracted, rebuilt, audited, and organized
+        the supplied Aristotle project for Palomar.
+      cost:
+        wall_time: "not reconstructed"
+        spend_usd: "not tracked"
+        hardware: "hosted services and a local macOS workstation"
+      prompting_notes: >-
+        The workflow repeatedly separated the original prime problem from the
+        auxiliary rough-integer theorem and required explicit dependency and
+        source audits.
+  spend_usd: "not tracked"
+  notes: >-
+    The mathematical manuscript was developed through a human-directed
+    pipeline/one-shot workflow. Aristotle produced and extended the Lean
+    development. The author directed the target, reviewed the mathematical
+    argument, and is responsible for the submitted result. Codex performed an
+    independent clean build and packaging audit of the supplied archive.
+
+fidelity:
+  divergences: >-
+    The compared Lean theorem exposes UpperBoundSieveDimOne as an explicit
+    hypothesis, whereas the manuscript cites the established fundamental
+    lemma as an external theorem. That fundamental lemma is not formalized in
+    Lean here. The downstream large-prime-factor argument uses the weaker
+    threshold (i log i)/40 rather than the manuscript's (i log i)/8; the final
+    quantitative statement is unchanged. The Lean transference theorem obtains
+    X^(eta/2) where the manuscript obtains X^eta, because Lean uses the
+    elementary estimate W <= 4^L in place of Mertens's product estimate. Since
+    the compared theorem asserts only the existence of some absolute positive
+    exponent, this rescaling leaves its statement unchanged. An unused
+    singleton-baseline lemma has 21 in place of the manuscript's 20 after
+    bounding an integer ceiling; it is not in the final dependency chain. The
+    manuscript sets kappa(L) to positive infinity when no rainbow cover exists,
+    while Lean defines real-valued kappa by sInf, which is zero for an empty
+    cover family. Every result used here constructs a cover explicitly, so the
+    empty-family convention is never used by the compared theorem. The theorem
+    concerns rough composite candidates n, not prime n, and makes no claim to
+    solve Erdos Problem 1059.
+
+review:
+  status: "agent-reviewed and author-supervised"
+  reviewers:
+    - "Aristotle proof and dependency audit"
+    - "OpenAI Codex independent archive and build audit"
+    - "Three independent OpenAI Codex presubmission referee audits"
+  notes: >-
+    A clean independent build accepted all proof modules under Lean 4.28.0 and
+    Mathlib revision 8f9d9cff6bd728b17a24e163c9402775d9e6a365. Source scans
+    found no sorry, admit, unsafe declaration, opaque placeholder, or custom
+    axiom outside the deliberate Challenge statement hole. Exported theorems
+    report only propext, Classical.choice, and Quot.sound. The sieve interface
+    was compared line by line with Koukoulopoulos, Theorem 18.11(a), as
+    documented in docs/SIEVE_SOURCE_AUDIT.md. Three independent presubmission
+    agents separately reviewed mathematical fidelity, Lean integrity, and
+    Palomar compliance; their reconciled report is in
+    docs/PRESUBMISSION_REFEREE_AUDIT.md. No independent human expert Lean review
+    is claimed.
+
+alignment:
+  namespace: "FactorialHypergraph.Palomar"
+  statements:
+    - source: "Theorem 1.2 of paper/factorial_residue_hypergraphs.tex"
+      lean: "FactorialHypergraph.Palomar.quantitative_auxiliary_erdos"
+      module: "Solution"
+      status: adapted
+      note: >-
+        The quantitative conclusion and the definition of the counted set
+        agree with the manuscript. The Lean statement additionally carries
+        UpperBoundSieveDimOne as an explicit hypothesis. The change from 1/8
+        to 1/40 occurs only in an intermediate large-prime-factor lemma. The
+        transference proof also replaces eta by eta/2 through an elementary
+        primorial estimate, and an unused baseline bound uses 21 instead of
+        20. Lean's real-valued sInf convention for kappa on an empty cover
+        family also differs from the manuscript's positive-infinity convention,
+        but the compared proof constructs covers and never uses the empty case.
+        None of these changes alters the existential quantitative conclusion.
+
+acknowledgements: >-
+  The formalization uses Lean and Mathlib. The research was conducted during
+  the 2026 RIPS program at IPAM, UCLA, with OpenAI as industrial sponsor.
+  Aristotle (Harmonic), OpenAI ChatGPT, and OpenAI Codex assisted with the
+  formalization, exploration, verification, and preparation workflow.

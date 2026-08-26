@@ -1,0 +1,144 @@
+# Factorial-residue hypergraphs and an auxiliary problem of Erdos
+
+This repository contains the Lean 4 formalization accompanying Aakash
+Gurung's manuscript *Factorial-residue hypergraphs and an auxiliary problem
+of Erdos*.
+
+## Result submitted to Palomar
+
+For a positive integer `L`, call `n` **`L`-rough** when every prime divisor of
+`n` is greater than `L`.  Let `goodSet L` consist of the integers `n` satisfying
+
+```text
+2 L! < n <= (L+1)!,
+n is L-rough,
+n - k! is composite for every 1 <= k <= L.
+```
+
+The compared Lean declaration proves, conditional on the explicitly stated
+standard dimension-one upper-bound sieve `UpperBoundSieveDimOne`, that there
+are constants `eta > 0` and `L0` such that
+
+```text
+((L+1)!)^eta / (100 log L) <= #(goodSet L)
+```
+
+for every `L >= L0`.
+
+This gives a quantitative form of an auxiliary question that Erdos suggested
+alongside Problem 1059.  It is not the original prime problem: the constructed
+integer `n` need not be prime.  The original question asking for infinitely
+many prime `p` such that every relevant `p-k!` is composite remains open.
+
+## Exact formal status
+
+The Palomar theorem is
+
+```lean
+FactorialHypergraph.Palomar.quantitative_auxiliary_erdos
+```
+
+and has an explicit hypothesis
+
+```lean
+hs : FactorialHypergraph.UpperBoundSieveDimOne
+```
+
+The fundamental lemma of sieve theory is not proved in Lean in this project.
+The finite weighted interface used here was matched, hypothesis by hypothesis,
+to Koukoulopoulos, *The Distribution of Prime Numbers*, Theorem 18.11(a), at
+sieve dimension one and `u = 10`; see
+[`docs/SIEVE_SOURCE_AUDIT.md`](docs/SIEVE_SOURCE_AUDIT.md).
+
+All problem-specific steps after that classical theorem are formalized.  In
+particular, the quadratic root counts, Mertens estimates needed by the
+application, the large-prime-factor estimate, the factorial-collision cover,
+the CRT construction, and the final transference argument are represented in
+Lean.  The final proof uses a `1/40` threshold in one intermediate
+large-prime-factor lemma rather than the manuscript's sharper `1/8`; this only
+changes how large `L` must be and leaves the compared conclusion unchanged.
+
+The Lean transference theorem obtains an intermediate count with exponent
+`eta/2`, whereas the manuscript obtains exponent `eta`: Lean uses the
+elementary bound `W <= 4^L` instead of Mertens's product estimate.  Because the
+compared theorem asserts only the existence of some absolute positive
+exponent, this rescaling does not change its statement.  An unused singleton
+baseline lemma also has constant `21` instead of the manuscript's `20`, solely
+to absorb an integer ceiling; it is not in the final dependency chain.
+
+The manuscript assigns `kappa(L) = +infinity` if no rainbow cover exists;
+Lean's real-valued `sInf` convention gives zero for an empty cover family.
+Every theorem used in the compared result constructs a cover explicitly, so
+the empty-family convention is never used and has no effect on the result.
+
+The source tree contains no `sorry`, `admit`, custom axiom, or unsafe
+declaration outside the deliberate `sorry` in `Challenge.lean`.  The proved
+result uses only `propext`, `Classical.choice`, and `Quot.sound`.
+
+## Repository map
+
+- [`Challenge.lean`](Challenge.lean) is the short Mathlib-only statement
+  surface audited by Palomar.  It defines the sieve hypothesis, roughness, and
+  the counted set directly and leaves the compared theorem as the deliberate
+  Challenge hole.
+- [`Solution.lean`](Solution.lean) connects that statement to the completed
+  proof.
+- [`FactorialHypergraph/`](FactorialHypergraph/) contains the substantive proof
+  development.
+- [`comparator.json`](comparator.json) selects the single quantitative theorem
+  and the three permitted axioms.
+- [`formalization.yaml`](formalization.yaml) records provenance, scope,
+  automation, fidelity, classifications, and review status.
+- [`paper/factorial_residue_hypergraphs.tex`](paper/factorial_residue_hypergraphs.tex)
+  is the mathematical manuscript formalized here.
+- [`docs/VERIFICATION.md`](docs/VERIFICATION.md) records the independent archive
+  and build audit.
+- [`docs/PRESUBMISSION_REFEREE_AUDIT.md`](docs/PRESUBMISSION_REFEREE_AUDIT.md)
+  reconciles three independent agent reviews of mathematical fidelity, Lean
+  integrity, and Palomar compliance.
+
+## Build
+
+The project pins Lean 4.28.0 and Mathlib commit
+`8f9d9cff6bd728b17a24e163c9402775d9e6a365`.
+
+```bash
+lake exe cache get
+lake build
+ruby scripts/validate-formalization.rb
+```
+
+On Linux with Git, Go, Ruby, Rust/Cargo, Python 3, and Landlock support, run
+the complete local Comparator and NanoDa replay with
+
+```bash
+./scripts/verify-comparator.sh
+```
+
+GitHub Actions runs the metadata, licence, Lean build, and Comparator checks.
+
+## Palomar submission
+
+Publish this directory as the root of a public GitHub repository.  After all
+checks pass, commit the exact snapshot and submit the repository name together
+with its full 40-character commit SHA and `comparator.json` at
+[submit.palomar-registry.org](https://submit.palomar-registry.org/).
+
+Palomar is a registry of machine-checked results, not a journal or a substitute
+for expert mathematical peer review.
+
+## Authorship, automation, and review
+
+Aakash Gurung directed the mathematical project and is responsible for the
+result.  The mathematical exploration and manuscript preparation used an
+AI-assisted pipeline involving OpenAI ChatGPT and Codex.  Aristotle (Harmonic)
+produced and extended the Lean development through iterative prompts and
+compiler feedback.  Codex independently extracted and rebuilt the supplied
+archive, checked the theorem and assumption boundary, and prepared this
+Palomar layout.  No independent human expert Lean review is claimed.
+
+## Licence
+
+The submitted repository snapshot is licensed under Apache-2.0; see
+[`LICENSE`](LICENSE).  Cited books, web pages, Mathlib, and other dependencies
+retain their own licences.
