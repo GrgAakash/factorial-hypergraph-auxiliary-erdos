@@ -15,8 +15,11 @@ manuscript `Aug25.tex`).  This is **not** Erdős Problem 1059: no primality of t
 The fundamental lemma of sieve theory is **not** formalized in Lean here, and this report does
 not claim that it is.
 
-Environment: Lean `4.28.0`; mathlib revision `8f9d9cff6bd728b17a24e163c9402775d9e6a365`
-(`lean-toolchain`, `lake-manifest.json`).
+Current package environment: Lean `4.33.0`; mathlib revision
+`db584cd6d46c92f209a44c0f1c829460d327499d` (`lean-toolchain`,
+`lake-manifest.json`).  The source match was originally carried out under Lean
+`4.28.0`; the 4.33 compatibility migration did not change the statement of
+`UpperBoundSieveDimOne` or its application.
 
 ---
 

@@ -163,8 +163,11 @@ review:
     - "OpenAI Codex independent archive and build audit"
     - "Three independent OpenAI Codex presubmission referee audits"
   notes: >-
-    A clean independent build accepted all proof modules under Lean 4.28.0 and
-    Mathlib revision 8f9d9cff6bd728b17a24e163c9402775d9e6a365. Source scans
+    Clean builds accepted all proof modules under Lean 4.28.0 during the
+    original independent archive audit and under Lean 4.33.0 with Mathlib
+    revision db584cd6d46c92f209a44c0f1c829460d327499d after the Palomar
+    compatibility migration. The migration changed three proof bodies but no
+    declaration statement. Source scans
     found no sorry, admit, unsafe declaration, opaque placeholder, or custom
     axiom outside the deliberate Challenge statement hole. Exported theorems
     report only propext, Classical.choice, and Quot.sound. The sieve interface
