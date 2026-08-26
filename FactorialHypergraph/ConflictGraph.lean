@@ -124,12 +124,12 @@ two distinct members are joined when they have the same prime colour or when the
 designated subsets meet. -/
 def conflictGraph {ι : Type*} (col : ι → ℕ) (B : ι → Finset ℕ) : SimpleGraph ι where
   Adj x y := x ≠ y ∧ (col x = col y ∨ (B x ∩ B y).Nonempty)
-  symm := by
+  symm := ⟨by
     rintro x y ⟨hne, h⟩
     refine ⟨hne.symm, ?_⟩
     rcases h with h | ⟨z, hz⟩
     · exact Or.inl h.symm
-    · exact Or.inr ⟨z, by simp only [Finset.mem_inter] at hz ⊢; exact ⟨hz.2, hz.1⟩⟩
+    · exact Or.inr ⟨z, by simp only [Finset.mem_inter] at hz ⊢; exact ⟨hz.2, hz.1⟩⟩⟩
   loopless := ⟨fun _ h => h.1 rfl⟩
 
 /-- An independent set of the conflict graph consists of members with pairwise distinct

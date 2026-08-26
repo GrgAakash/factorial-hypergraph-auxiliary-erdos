@@ -392,7 +392,8 @@ theorem card_le_two_of_dvd_fq_lt {q : ℕ} (hq : q.Prime) (s : Finset ℕ)
   have hle : s.card ≤ (rootsMod q).card := by
     refine card_le_card_rootsMod hq5 (le_refl 1) s ?_ ?_
     · intro i hi j hj hij
-      have h1 : i % q = j % q := by simpa [pow_one] using hij
+      change i % (q ^ 1) = j % (q ^ 1) at hij
+      have h1 : i % q = j % q := by simpa only [pow_one] using hij
       rwa [Nat.mod_eq_of_lt (hs i hi), Nat.mod_eq_of_lt (hs j hj)] at h1
     · intro i hi
       simpa [pow_one] using hdvd i hi

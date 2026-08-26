@@ -31,7 +31,7 @@ no `sorry`, `admit`, opaque placeholder or user-defined axiom is introduced.
 
 ## 1. What the pinned mathlib revision contains
 
-Lean `4.28.0`, mathlib rev `8f9d9cff6bd728b17a24e163c9402775d9e6a365`.  An exhaustive
+Lean `4.33.0`, mathlib rev `db584cd6d46c92f209a44c0f1c829460d327499d`.  A search
 search of that revision for prime-counting / prime-number-theorem material yields exactly
 the following declarations (file `Mathlib/NumberTheory/Chebyshev.lean`, plus
 `Mathlib/NumberTheory/PrimeCounting.lean`):

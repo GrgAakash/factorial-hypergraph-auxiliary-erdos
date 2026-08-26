@@ -132,7 +132,7 @@ theorem abs_S_sub_S_le {M N : ℕ} (hM : 1 ≤ M) (hMN : M ≤ N) :
       push_cast
       rw [div_le_div_iff₀ (by linarith) hn0]
       linarith)
-  simpa using h
+  simpa only [div_eq_mul_inv, one_mul, Nat.cast_add, Nat.cast_one] using h
 
 /-- `T` is bounded. -/
 theorem abs_T_le (N : ℕ) : |T N| ≤ 2 := by

@@ -52,6 +52,23 @@ expected warning for its deliberate theorem hole; the proof development and
 `FactorialHypergraph/Example329.lean` was included in the successful full
 build.
 
+## Lean 4.33 Palomar compatibility migration
+
+The Palomar package was subsequently migrated without changing any declaration
+statement to:
+
+```text
+Lean:    leanprover/lean4:v4.33.0
+Mathlib: db584cd6d46c92f209a44c0f1c829460d327499d
+```
+
+Three proof bodies required compatibility-only changes: construction of the
+new `Std.Symm` field wrapper in `ConflictGraph.lean`, explicit unfolding of a
+natural modular congruence in `QuadraticRoots.lean`, and explicit normalization
+of division and casts in `MertensCharacter.lean`.  A full `lake build` then
+completed successfully with 8739 jobs.  The selected theorem in `Solution.lean`
+continued to report exactly `[propext, Classical.choice, Quot.sound]`.
+
 The current Palomar metadata loader accepted `formalization.yaml`, the bundled
 Ruby validator accepted it with no template sentinels, and the current Palomar
 comparator-config loader accepted `comparator.json`.  The sandboxed
