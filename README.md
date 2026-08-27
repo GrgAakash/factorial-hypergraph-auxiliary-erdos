@@ -127,6 +127,8 @@ NanoDa checks succeeded.
 
 Palomar is a registry of machine-checked results, not a journal or a substitute
 for expert mathematical peer review.
+New formalizations can be submitted through the
+[Palomar submission form](https://submit.palomar-registry.org/).
 
 ## Authorship, automation, and review
 
