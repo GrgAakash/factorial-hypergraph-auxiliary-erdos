@@ -1,8 +1,5 @@
 # Factorial-residue hypergraphs and an auxiliary problem of Erdos
 
-**When the manuscript has been fully edited and revised by humans, it will be marked "Final Version".**
-Neither manuscript version below is currently marked final.
-
 This repository contains the Lean 4 formalization accompanying Aakash
 Gurung's manuscript *Factorial-residue hypergraphs and an auxiliary problem
 of Erdos*.
