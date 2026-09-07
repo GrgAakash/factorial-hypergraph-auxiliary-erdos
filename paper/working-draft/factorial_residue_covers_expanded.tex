@@ -1,0 +1,1993 @@
+\documentclass[11pt]{amsart}
+
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{microtype}
+\usepackage{booktabs}
+\usepackage[hidelinks]{hyperref}
+
+\hypersetup{
+  pdftitle={Factorial-residue hypergraphs and covering congruences},
+  pdfauthor={},
+  pdfsubject={Weighted factorial-residue hypergraphs, covering congruences, and rough integers},
+  pdfkeywords={factorials, edge-colored hypergraphs, rainbow edge covers, covering congruences, sieve methods, rough numbers}
+}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\title[Factorial-residue hypergraphs]
+{Factorial-residue hypergraphs and covering congruences}
+\author{}
+\date{}
+
+\subjclass[2020]{11N36, 11B65, 11A41, 05C65}
+\keywords{factorials, edge-colored hypergraphs, rainbow edge covers, covering congruences, sieve methods, rough numbers}
+
+\begin{document}
+
+\begin{abstract}
+We study covering congruences for factorials using a weighted hypergraph
+whose edges collect indices with equal factorial residues and whose
+colors are primes. The minimum
+weight $\kappa(L)$ of a rainbow cover equals the logarithm of the least
+squarefree modulus of such a system. We prove
+$\kappa(L)\leq(1-\delta)L\log L$ for an absolute $\delta>0$, even after
+any $\lfloor L/100\rfloor$ primes are excluded. By counting permutations
+of the remaining assignments, we obtain one modulus with
+$((L+1)!)^{1/2-o(1)}$ distinct covering classes. This gives at least as
+many $L$-rough integers in $(2L!,(L+1)!]$ whose differences from
+$1!,\ldots,L!$ are all composite, uniformly in any prescribed reduced
+residue class modulo $d\leq e^L$. We also prove
+$\kappa(L)\geq(2/3-o(1))L^{1/3}\log L$. A resultant estimate bounds
+the number of triples of equal factorial residues with small span. It
+implies that covers whose consecutive triples all have span
+$o(L^{1/4})$ have weight at least $(1/2-o(1))L\log L$.
+The rough-integer result strengthens a quantitative solution of an
+auxiliary problem of Erd\H{o}s; the integers obtained need not be prime.
+\end{abstract}
+
+\maketitle
+
+\begin{center}
+\small\textit{Working draft --- exposition and mathematical review in progress.}
+\end{center}
+
+\section{Introduction}\label{sec:intro}
+
+In Problem A2 of \cite{Guy}, Erd\H{o}s asks whether there are infinitely
+many primes $p$ such that $p-k!$ is composite whenever $1\leq k!<p$.
+This is also listed as Erd\H{o}s Problem 1059 \cite{Bloom}. He also
+suggested an auxiliary problem in which the integer itself need only
+have large prime factors. In this paper, we study the covering
+congruences used to construct such integers. When several factorials
+have the same residue modulo a prime, one congruence makes that prime
+divide each of the corresponding differences. We use these equalities
+to reduce the product of the primes needed to cover all the factorials.
+
+We first fix the notation for this covering problem. For $L\geq2$, let
+$\mathcal H_L$ be the weighted edge-colored
+multihypergraph on $V_L=\{2,\ldots,L\}$ whose nonempty edges are
+\[
+E_{q,a}=\{k\in V_L:k!\equiv a\pmod q\},
+\qquad L<q<L!,\quad a\in(\mathbb Z/q\mathbb Z)^\times.
+\]
+Each edge has color $q$ and weight $\log q$. A \emph{rainbow cover} selects
+at most one edge of each color and covers every vertex. Write $\kappa(L)$
+for its minimum weight, with value $+\infty$ when no cover exists.
+The Chinese remainder theorem (CRT) gives
+\[
+\kappa(L)=\log M_{\min}(L),
+\]
+where $M_{\min}(L)$ is the least squarefree modulus of a compatible
+covering system using these primes and residues. We give the precise
+definition and prove this equality in
+Proposition~\ref{prop:crt-equivalence}. Our first result bounds the
+weight of a cover.
+\begin{theorem}\label{thm:covercost}
+There are absolute constants $\delta>0$ and $L_0$ such that
+\[
+\kappa(L)\leq(1-\delta)L\log L
+\]
+for every integer $L\geq L_0$.
+\end{theorem}
+Assigning a different prime to each index gives a cover of weight
+$(1+o(1))L\log L$. Theorem~\ref{thm:covercost} improves this bound by
+pairing indices. The identity used in the proof is
+\begin{equation}\label{eq:keyidentity}
+(i+2)!-i!=i!\bigl(i^2+3i+1\bigr).
+\end{equation}
+A product argument and a dimension-one upper-bound sieve give a
+positive proportion of pairs with primes $L<q\ll L^{2-\alpha}$.
+We then use a conflict graph to choose disjoint pairs with distinct
+primes. Each chosen prime covers both indices in its pair. We assign
+individual primes of size $O(L\log L)$ to the remaining indices.
+
+The same construction allows us to exclude any set of at most
+$\lfloor L/100\rfloor$ primes; see Theorem~\ref{thm:robust}.
+This will be useful when we prescribe an additional congruence for the
+integers we construct. We also count the distinct residue classes
+obtained by permuting the primes assigned to individual indices in
+Theorem~\ref{thm:ensemble}.
+
+We next consider lower bounds. Proposition~\ref{prop:fibresize} and
+Corollary~\ref{cor:globallower} give
+\[
+\kappa(L)\geq(2/3-o(1))L^{1/3}\log L.
+\]
+There is a stronger bound when the indices in each fiber are close
+together. Suppose every consecutive triple in every designated fiber
+has span at most $cL^{1/4}$, where $c>0$ is fixed. Then
+Corollary~\ref{cor:localcost} gives
+\[
+\frac{w(\mathcal C)}{\log((L+1)!)}
+\geq\frac12-\frac{c^4}{192}-o(1).
+\]
+In particular, a full cover whose consecutive-triple spans are
+$o(L^{1/4})$ costs at least $(1/2-o(1))L\log L$.
+The order of $\kappa(L)$ is not determined by these bounds.
+
+\subsection*{Erd\H{o}s's auxiliary problem}
+The auxiliary problem of Erd\H{o}s asks for infinitely many pairs $(L,n)$
+with $L!<n\leq(L+1)!$, every prime factor of $n$ exceeding $L$, and
+$n-k!$ composite for $1\leq k\leq L$.
+For $n>1$, write $P^-(n)$ and $P^+(n)$ for its least and greatest prime
+factors. We call $n$ \emph{$L$-rough} when $P^-(n)>L$.
+
+The covering construction gives the following quantitative form of the
+auxiliary statement.
+\begin{theorem}\label{thm:main}
+There are absolute constants $\eta>0$ and $L_1$ such that, for every
+integer $L\geq L_1$, at least
+\[
+\frac{((L+1)!)^\eta}{100\log L}
+\]
+integers $n\in(2L!,(L+1)!]$ are $L$-rough and have $n-k!$ composite for
+all $1\leq k\leq L$.
+\end{theorem}
+
+By counting several covering classes, we obtain the following stronger
+bound, also in prescribed arithmetic progressions.
+\begin{theorem}\label{thm:abundance}
+For every $\varepsilon>0$, there is $L_\varepsilon$ such that the following
+holds for every integer $L\geq L_\varepsilon$. Put $X=(L+1)!$.
+For every integer $1\leq d\leq e^L$ and every residue $b\pmod d$ with
+$(b,d)=1$, at least $X^{1/2-\varepsilon}$ integers
+$n\in(2L!,X]$ satisfy
+\[
+n\equiv b\pmod d,\qquad P^-(n)>L,
+\qquad n-k!\text{ composite }(1\leq k\leq L).
+\]
+The threshold is independent of $d$ and $b$.
+\end{theorem}
+
+Our proof of Theorem~\ref{thm:abundance} uses the elementary estimate
+\[
+\#\{(i,j)\in\{1,\ldots,L\}^2:i!\equiv j!\pmod q\}
+\leq6L^{3/2}\qquad(q>L),
+\]
+and Lemma~\ref{lem:permutationimage}, which bounds the number of
+distinct images of permutations. Estimates of order $L^{3/2}$ for
+equal factorial residues are classical; see
+\cite[Theorem~1, with $\ell=1$]{GaraevLucaShparlinski}. A direct proof
+with the displayed constant is included. We then count rough integers
+in these classes by inclusion--exclusion.
+
+Land \cite{Land} has posted a proposed solution of the prime problem
+using a sieve for sparse sets of shifts and Fourier estimates. The
+theorem stated there also implies existence in the auxiliary problem.
+Our proofs are independent of that work. Here we study the size of the
+covering modulus, the number of classes it gives, and restrictions on
+the indices that one prime can cover.
+
+Other work on factorial residues studies value sets and congruence
+counts modulo a fixed prime; see
+\cite{BanksLucaShparlinskiStichtenoth,GaraevLucaShparlinski,KlurmanMunsch,Hu}.
+In our covering problem, the prime varies from one edge to another, but
+only one residue can be chosen for each prime.
+
+\subsection*{Outline of the paper}
+Section~\ref{sec:hypergraph} defines the covers and proves the elementary
+bounds used later. Sections~\ref{sec:quadratic}--\ref{sec:construction}
+give the quadratic construction, including the choice of primes when
+some are excluded. Section~\ref{sec:ensemble} counts covering classes,
+and Section~\ref{sec:locality} bounds triples of equal factorial
+residues with small span. In Section~\ref{sec:arithmetic}, we count
+rough integers in the resulting progressions and prove
+Theorems~\ref{thm:main} and \ref{thm:abundance}. We end with
+computational examples and further questions.
+
+The original quantitative auxiliary theorem and its proof using
+quadratic congruences have an accompanying Lean formalization registered as
+PALOMAR-2026-08-27-000003 v1 \cite{Palomar}. The standard dimension-one
+upper-bound sieve is an explicit external hypothesis, matched to
+\cite[Theorem~18.11(a)]{Koukoulopoulos}. That formalization does not
+include the additional results here on excluded primes, counts of
+covering classes, resultants, or prescribed progressions.
+
+\section{Residue covers and covering congruences}\label{sec:hypergraph}
+
+Let $L\geq2$ and put
+\[
+V_L=\{2,3,\ldots,L\}.
+\]
+
+\begin{definition}\label{def:fibres}
+For a prime $L<q<L!$ and a nonzero residue $a\pmod q$, let $e_{q,a}$ be a
+labeled hyperedge with incident vertex set
+\[
+E_{q,a}=\{k\in V_L:k!\equiv a\pmod q\}.
+\]
+After empty edges are omitted, these labeled edges form a weighted
+edge-colored multihypergraph $\mathcal H_L$.  The edge $e_{q,a}$ has color
+$q$ and weight $\log q$.
+\end{definition}
+
+Since $q>L$, every $k!$ with $k\in V_L$ is nonzero modulo $q$.  Therefore,
+for each fixed $q$, the fibers $E_{q,a}$ partition $V_L$, with empty fibers
+omitted.
+
+\begin{definition}\label{def:cover}
+A \emph{rainbow edge cover} of $\mathcal H_L$ is a finite collection
+\[
+\mathcal C=\{e_{q,a_q}:q\in Q\}
+\]
+with distinct primes $L<q<L!$, one residue $a_q\in(\mathbb Z/q\mathbb Z)^\times$
+for each $q\in Q$, nonempty fibers $E_{q,a_q}$, and
+\[
+V_L\subseteq\bigcup_{q\in Q}E_{q,a_q}.
+\]
+Its weight is
+\[
+w(\mathcal C)=\sum_{q\in Q}\log q.
+\]
+We define
+\[
+\kappa(L)=\inf_{\mathcal C}w(\mathcal C),
+\]
+where the infimum is over all rainbow edge covers, and put
+$\kappa(L)=+\infty$ if none exists.
+\end{definition}
+
+The rainbow condition is necessary because choosing two different fibers of
+the same color would impose incompatible residues modulo the same prime.
+
+\begin{proposition}\label{prop:criterion}
+Let $2\leq i<j\leq L$ and let $q>L$ be prime.  Then
+\[
+\begin{aligned}
+i!\equiv j!\pmod q
+&\quad\Longleftrightarrow\quad
+\prod_{r=i+1}^{j}r\equiv1\pmod q\\
+&\quad\Longleftrightarrow\quad
+q\mid\left(\prod_{r=i+1}^{j}r-1\right).
+\end{aligned}
+\]
+\end{proposition}
+
+\begin{proof}
+We have
+\[
+j!=i!\prod_{r=i+1}^{j}r.
+\]
+Also, $q>L\geq i$, so $q\nmid i!$.  We may therefore cancel $i!$ modulo
+$q$.  The three conditions are now equivalent.
+\end{proof}
+
+Assigning a different prime to each index gives the following bound.
+
+\begin{proposition}\label{prop:baseline}
+For every sufficiently large $L$,
+\[
+\kappa(L)\leq(L-1)\log(20L\log L)
+=(1+o(1))L\log L.
+\]
+In particular, a rainbow edge cover exists, and the infimum in
+Definition~\ref{def:cover} is a minimum.
+\end{proposition}
+
+\begin{proof}
+The prime number theorem gives
+\[
+\pi(20L\log L)-\pi(L)>2L
+\]
+for all sufficiently large $L$.  Choose distinct primes
+$q_k\in(L,20L\log L]$ for $k\in V_L$.  We also have
+$20L\log L<L!$ for large $L$.  The edges $e_{q_k,k!}$ form a rainbow edge
+cover, and their total weight is at most
+\[
+(L-1)\log(20L\log L).
+\]
+There are only finitely many primes between $L$ and $L!$, and each has only
+finitely many fibers.  Hence there are only finitely many rainbow edge covers.
+The nonempty finite set of their weights has a minimum.
+\end{proof}
+
+We now relate the weight of a cover to its modulus. For
+sufficiently large $L$, let $M_{\min}(L)$ be the least squarefree product
+$M$ of primes $L<q<L!$ for which there exists
+$A\in(\mathbb Z/M\mathbb Z)^\times$ satisfying both of the following
+conditions:
+\begin{enumerate}
+\item for every prime $q\mid M$, there is a $k\in V_L$ such that
+$A\equiv k!\pmod q$;
+\item for every $k\in V_L$, there is a prime $q\mid M$ such that
+$A\equiv k!\pmod q$.
+\end{enumerate}
+
+\begin{proposition}[Covering congruences]
+\label{prop:crt-equivalence}
+For every sufficiently large $L$,
+\[
+\kappa(L)=\log M_{\min}(L).
+\]
+More precisely, a rainbow edge cover $\mathcal C$ gives a modulus
+\[
+M(\mathcal C)=\prod_{q\in Q}q
+\]
+with
+\[
+\log M(\mathcal C)=w(\mathcal C),
+\]
+and every pair $(M,A)$ in the definition of $M_{\min}(L)$ gives a rainbow
+edge cover of weight $\log M$.
+\end{proposition}
+
+\begin{proof}
+Let $\mathcal C=\{e_{q,a_q}:q\in Q\}$ be a rainbow edge cover.  The primes
+in $Q$ are distinct, so the Chinese remainder theorem gives a unique residue class
+$A\pmod {M(\mathcal C)}$ satisfying
+\[
+A\equiv a_q\pmod q\qquad(q\in Q).
+\]
+Every $a_q$ is nonzero, so $(A,M(\mathcal C))=1$.  If $k\in E_{q,a_q}$,
+then $A\equiv k!\pmod q$.  Thus $(M(\mathcal C),A)$ satisfies the defining
+conditions for $M_{\min}(L)$.  Also,
+\[
+\log M(\mathcal C)=\sum_{q\in Q}\log q
+=w(\mathcal C).
+\]
+
+Conversely, let $(M,A)$ satisfy the defining conditions for $M_{\min}(L)$.
+For each prime $q\mid M$, choose the edge $e_{q,A\bmod q}$.  The residue is
+nonzero because $(A,M)=1$, and the second condition says that these edges
+cover $V_L$.  They use at most one edge of each color and have total weight
+\[
+\sum_{q\mid M}\log q=\log M.
+\]
+Taking the two minima proves the proposition.
+\end{proof}
+
+\subsection{Finite covers and a lower bound}
+Let $m\geq1$, let $\mathbf h=(h_1,\ldots,h_m)$ be distinct nonzero
+integers, and let
+$\mathcal P$ be a finite set of primes, none dividing $\prod_i h_i$.
+For $q\in\mathcal P$, use the nonempty fibers
+\[
+E_{q,a}(\mathbf h)=\{i:h_i\equiv a\pmod q\}
+\]
+with weight $\log q$. Define $\kappa_{\mathcal P}(\mathbf h)$ by the same
+definition, with value $+\infty$ if no cover exists.
+The proof of Proposition~\ref{prop:crt-equivalence} applies here as
+well. Choosing at most one nonzero residue for each prime gives a
+compatible system, and its weight is $\log M$. The minimum depends on
+the specified prime set $\mathcal P$.
+
+Equivalently, the minimum is given by the integer program
+\[
+\min \sum_{q,a}x_{q,a}\log q,
+\qquad
+\sum_{q,a:i\in E_{q,a}}x_{q,a}\geq1,
+\qquad
+\sum_a x_{q,a}\leq1,
+\qquad x_{q,a}\in\{0,1\}.
+\]
+The sums run over nonempty fibers. Allowing real values
+$x_{q,a}\geq0$ gives the corresponding linear programming relaxation.
+Its minimum is a lower bound for the minimum above.
+
+\begin{proposition}[A lower bound for the cover weight]
+\label{prop:dual}
+Let $y_1,\ldots,y_m$ be nonnegative real numbers, and set
+\[
+z_q=\max\left\{0,\ \max_a\sum_{i\in E_{q,a}(\mathbf h)}y_i-\log q\right\}.
+\]
+Then
+\[
+\kappa_{\mathcal P}(\mathbf h)\geq\sum_{i=1}^m y_i-\sum_{q\in\mathcal P}z_q.
+\]
+The same inequality holds for every feasible fractional solution above.
+\end{proposition}
+\begin{proof}
+For a feasible vector $x$, nonnegativity, the vertex constraints, and then
+the color constraints give
+\[
+\begin{aligned}
+\sum_i y_i
+&\leq\sum_{q,a}x_{q,a}\sum_{i\in E_{q,a}}y_i\\
+&\leq\sum_{q,a}x_{q,a}\log q+\sum_q z_q\sum_a x_{q,a}\\
+&\leq\sum_{q,a}x_{q,a}\log q+\sum_qz_q.
+\end{aligned}
+\]
+Rearranging proves the assertion for both integer and fractional covers.
+\end{proof}
+
+\begin{proposition}[Consecutive integer shifts]\label{prop:intervalshifts}
+For $\mathbf h=(1,2,\ldots,m)$ and an admissible set $\mathcal P$ of at
+least $m$ primes all exceeding $m$, let $q_1<\cdots<q_m$ be its $m$
+smallest members. Then
+\[
+\kappa_{\mathcal P}(\mathbf h)=\sum_{j=1}^m\log q_j.
+\]
+If the set $\mathcal P$ contains the first $m$ primes exceeding $m$,
+then this minimum is asymptotic to $m\log m$.
+\end{proposition}
+\begin{proof}
+Reduction modulo $q>m$ is injective on $\{1,\ldots,m\}$. Every fiber is a
+singleton, so at least $m$ different primes are necessary, and the $m$
+smallest suffice. In the last assertion the lower bound is $m\log m$.
+The prime number theorem places the $m$th prime exceeding $m$ below
+$2m\log m$ for sufficiently large $m$, giving the matching upper bound
+$m\log(2m\log m)=(1+o(1))m\log m$.
+\end{proof}
+
+\subsection{Choosing compatible edges}
+To choose edges with distinct primes, let $\mathcal F$ be a finite family
+of triples
+\[
+F=(q,a,B_F),
+\qquad
+\varnothing\neq B_F\subseteq E_{q,a}.
+\]
+The set $B_F$ is the \emph{designated subset} of $F$.  Define the auxiliary
+conflict graph $G_{\mathcal F}$ on vertex set $\mathcal F$ by joining
+distinct triples $F=(q,a,B_F)$ and $F'=(q',a',B_{F'})$ whenever $q=q'$ or
+\[
+B_F\cap B_{F'}\neq\varnothing.
+\]
+
+\begin{proposition}[An independent set of large weight]
+\label{prop:conflict-selection}
+Suppose that the conflict graph of $\mathcal F$ has maximum degree at most
+$D$.  If $w(F)\geq0$ for every $F\in\mathcal F$, then there is a subfamily
+$\mathcal J\subseteq\mathcal F$ with distinct prime colors and pairwise
+disjoint designated subsets such that
+\[
+\sum_{F\in\mathcal J}w(F)
+\geq\frac1{D+1}\sum_{F\in\mathcal F}w(F).
+\]
+In the special case $w(F)=1$ for every $F$, one may choose $\mathcal J$ so
+that
+\[
+|\mathcal J|\geq\frac{|\mathcal F|}{D+1}.
+\]
+\end{proposition}
+
+\begin{proof}
+A finite graph of maximum degree at most $D$ has a proper coloring with at
+most $D+1$ colors: order the vertices arbitrarily and color them greedily.
+The color classes are independent sets and partition $\mathcal F$.  One of
+them has weight at least the average of their weights.  Taking this color
+class as $\mathcal J$ proves the weighted inequality.  Taking unit weights
+gives the last assertion.  Independence gives distinct prime colors and
+pairwise disjoint designated subsets by the definition of the conflict graph.
+\end{proof}
+
+Covering the indices in $B_F$ individually has leading weight
+$|B_F|\log L$. A single prime saves a fixed proportion of this weight
+only when $q\leq L^{|B_F|-\varepsilon}$ for some $\varepsilon>0$.
+In the quadratic construction $|B_F|=2$, so we seek primes in the range
+$q\ll L^{2-\alpha}$.
+
+
+\begin{proposition}[Completing a cover]\label{prop:completion}
+In the finite shift system above, suppose a candidate family $\mathcal F$
+has designated nonempty sets $B_F\subseteq E_{q_F,a_F}$, and its conflict
+graph has maximum degree at most $\Delta$. Suppose there are at least $m$
+additional admissible primes, all at most $T$, none occurring as a
+candidate color. Define
+\[
+\sigma(F)=\bigl(|B_F|\log T-\log q_F\bigr)_+,
+\qquad x_+=\max\{x,0\}.
+\]
+Then the enlarged prime set admits a rainbow cover of weight at most
+\[
+m\log T-\frac1{\Delta+1}\sum_{F\in\mathcal F}\sigma(F).
+\]
+\end{proposition}
+\begin{proof}
+Discard candidates with zero saving and apply
+Proposition~\ref{prop:conflict-selection} with weights $\sigma(F)$.
+The selected family $\mathcal J$ has disjoint designated sets and
+saves at least $(\Delta+1)^{-1}\sum_F\sigma(F)$.
+Assign a different additional prime to each remaining index. If
+$v=\sum_{F\in\mathcal J}|B_F|$, the total weight is at most
+\[
+\sum_{F\in\mathcal J}\log q_F+(m-v)\log T
+=m\log T-\sum_{F\in\mathcal J}\sigma(F).
+\]
+All added primes are different from the selected colors, so the cover is
+compatible.
+\end{proof}
+
+\section{Prime divisors of a quadratic}\label{sec:quadratic}
+
+We first count the indices for which $i^2+3i+1$ has a sufficiently
+large prime divisor. Throughout this section, put
+\[
+f(t)=t^2+3t+1.
+\]
+
+\subsection{Roots modulo prime powers}
+
+We also let $\chi_5$ be the primitive quadratic character modulo $5$, and we
+extend it by setting $\chi_5(5)=0$.  We will use the prime number theorem, the
+Siegel--Walfisz theorem for the fixed modulus $5$, and Mertens's estimates in
+the forms stated in
+\cite[Theorems 3.4, 8.1 and 12.1]{Koukoulopoulos}.  Let
+\[
+\Theta_{\chi_5}(x)=\sum_{p\leq x}\chi_5(p)\log p.
+\]
+For $a\in(\mathbb Z/5\mathbb Z)^\times$, the fixed-modulus Siegel--Walfisz
+estimate for $\pi(x;5,a)$ and partial summation give
+$\vartheta(x;5,a)=x/4+O(xe^{-c\sqrt{\log x}})$ for some $c>0$.  Since the
+sum of $\chi_5(a)$ over these four classes is zero, summing with weights
+$\chi_5(a)$ gives
+$\Theta_{\chi_5}(x)\ll xe^{-c\sqrt{\log x}}$.
+Partial summation therefore gives
+\begin{equation}\label{eq:chi}
+\begin{aligned}
+\sum_{p\leq x}\chi_5(p)\frac{\log p}{p-1}
+&=\frac{\Theta_{\chi_5}(x)}{x-1}
+ +\int_2^x\frac{\Theta_{\chi_5}(t)}{(t-1)^2}\,dt+O(1)\\
+&=O(1).
+\end{aligned}
+\end{equation}
+Indeed, the integrand is $O(e^{-c\sqrt{\log t}}/t)$, which is integrable on
+$[2,\infty)$.  The same argument, now using the weight $1/(t\log t)$,
+gives
+\[
+\sum_{p\leq x}\frac{\chi_5(p)}p
+=\frac{\Theta_{\chi_5}(x)}{x\log x}
+ +\int_2^x\Theta_{\chi_5}(t)
+ \frac{\log t+1}{t^2(\log t)^2}\,dt+O(1)
+=O(1).
+\]
+For $p\neq5$, we have
+$\mathbf 1_{\chi_5(p)=1}=(1+\chi_5(p))/2$.  Mertens's estimate now gives
+\begin{equation}\label{eq:split}
+\sum_{\substack{p\leq x\\ \chi_5(p)=1}}\frac1p
+=\frac12\log\log x+O(1).
+\end{equation}
+
+The identity
+\begin{equation}\label{eq:discriminant}
+(2t+3)^2=4f(t)+5
+\end{equation}
+shows that, for $p\neq2,5$, the number of roots of $f$ modulo $p$ is
+$1+\left(\frac5p\right)$.  Since $5\equiv1\pmod4$, quadratic reciprocity
+gives
+\[
+\left(\frac5p\right)=\left(\frac p5\right)=\chi_5(p).
+\]
+Thus,
+\begin{equation}\label{eq:rho}
+\rho(p)=1+\chi_5(p)\in\{0,2\}.
+\end{equation}
+The derivative is $f'(t)=2t+3$.  If a root of $f$ modulo $p$ were not simple,
+then $f(t)\equiv f'(t)\equiv0\pmod p$, and \eqref{eq:discriminant} would give
+$p\mid5$.  Hence, every root under consideration is simple.  Hensel's lemma
+then gives exactly one lift of each root to every modulus $p^a$.  There is no
+root modulo $2$.  Modulo $5$ there is one root, but it does not lift to a root
+modulo $25$, because
+\begin{equation}\label{eq:five}
+f(1+5t)=5(1+5t+5t^2).
+\end{equation}
+
+\subsection{Large prime factors}
+
+\begin{lemma}\label{lem:largeprime}
+For all sufficiently large $N$,
+\[
+\#\left\{1\leq i\leq N:P^+(f(i))>\frac18 i\log i\right\}\geq\frac N5.
+\]
+\end{lemma}
+
+\begin{proof}
+We begin with the indices for which every prime factor of $f(i)$ is at
+most $i$. Put
+\[
+E_N=\left\{i:\frac{N}{\log N}<i\leq N,\ P^+(f(i))\leq i\right\},
+\qquad
+Q_N=\prod_{i\in E_N}f(i).
+\]
+Every prime divisor of $Q_N$ is at most $N$.  For $p\neq2,5$, the root count
+modulo prime powers gives
+\begin{align*}
+\operatorname{ord}_p\left(\prod_{i\leq N}f(i)\right)
+&=\sum_{a\geq1}\#\{i\leq N:p^a\mid f(i)\}.
+\end{align*}
+For every $a\geq1$, there are $\rho(p)$ root classes modulo $p^a$, and hence
+\[
+\#\{i\leq N:p^a\mid f(i)\}
+\leq \frac{N\rho(p)}{p^a}+\rho(p).
+\]
+Also, $p^a\mid f(i)$ is possible only when $p^a\leq N^2+3N+1$.
+Consequently, only $O(\log N/\log p)$ values of $a$ occur, and summing the
+geometric series gives
+\[
+\operatorname{ord}_p\left(\prod_{i\leq N}f(i)\right)
+\leq
+\frac{N\rho(p)}{p-1}
++O\left(\rho(p)\frac{\log N}{\log p}\right).
+\]
+The prime $2$ contributes nothing.  Equation \eqref{eq:five} shows that
+$5\mid f(i)$ precisely when $i\equiv1\pmod5$, and that in this case
+$5^2\nmid f(i)$.  Thus, the contribution of $p=5$ to the logarithm below is
+$O(N)$.  Moreover,
+\[
+\log N\sum_{p\leq N}\rho(p)\ll \log N\,\pi(N)\ll N.
+\]
+Therefore, Mertens's estimate together with \eqref{eq:chi} gives
+\begin{align*}
+\log Q_N
+&\leq
+N\sum_{p\leq N}\frac{(1+\chi_5(p))\log p}{p-1}
++O\left(\log N\sum_{p\leq N}\rho(p)\right)+O(N)\\
+&=N\log N+O(N).
+\end{align*}
+For the corresponding lower bound, uniformly for
+$N/\log N<i\leq N$, we have
+\[
+\log f(i)=2\log N+O(\log\log N).
+\]
+It follows that
+\[
+\log Q_N
+\geq |E_N|\bigl(2\log N-O(\log\log N)\bigr).
+\]
+Comparing this inequality with the upper estimate for $\log Q_N$, we obtain
+\[
+|E_N|\leq\left(\frac12+o(1)\right)N.
+\]
+The interval $(N/\log N,N]$ contains $N-o(N)$ integers.  Thus, at least
+$(1/2-o(1))N$ integers in this interval satisfy $P^+(f(i))>i$.  Put
+\[
+\mathcal S_N=
+\left\{i:\frac{N}{\log N}<i\leq N,\ P^+(f(i))>i\right\}.
+\]
+We have proved that $|\mathcal S_N|\geq(1/2-o(1))N$.  It remains to
+strengthen the lower bound for these prime factors.
+
+Discard from $\mathcal S_N$ the indices for which
+\[
+P^+(f(i))\leq\frac18N\log N.
+\]
+For every discarded index, the prime $q=P^+(f(i))$ exceeds $i$.  Hence, the
+relevant indices lie in $[1,q-1]$ and are distinct modulo $q$.  Since $f$
+has at most two roots modulo $q$, a fixed prime $q$ can occur for at most two
+indices.  Therefore,
+the number of discarded indices is at most
+\[
+2\pi\left(\frac18N\log N\right)
+=\left(\frac14+o(1)\right)N.
+\]
+At least $(1/2-o(1))N$ indices were available, and at most
+$(1/4+o(1))N$ were discarded. Thus at least $(1/4-o(1))N$ remain. For
+each remaining index,
+\[
+P^+(f(i))>\frac18N\log N\geq\frac18i\log i.
+\]
+Since $1/4-o(1)>1/5$ for all sufficiently large $N$, at least $N/5$ indices
+satisfy the required inequality.  This proves the lemma.
+\end{proof}
+
+\section{A sieve estimate for the complementary factor}\label{sec:sieve}
+
+A prime used to cover a pair must also satisfy the upper bound needed
+for the modulus. Write $f(i)=mq$, where $q>L$ is prime. A lower bound
+for $m$ gives an upper bound for $q$. We therefore estimate the number
+of indices for which $m$ is small.
+
+\subsection{The polynomials to be sieved}
+
+For $0<\alpha\leq1/2$, let
+\[
+E_\alpha(L)
+=
+\#\left\{1\leq i\leq L:
+ f(i)=mq\text{ for some }m\leq L^\alpha
+ \text{ and prime }q>L
+\right\}.
+\]
+Thus, $E_\alpha(L)$ counts the indices for which a prime factor $q>L$ has a
+complementary factor $m\leq L^\alpha$. The next lemma bounds this number
+in terms of $\alpha$.
+
+\begin{lemma}\label{lem:smallcofactor}
+There is an absolute constant $C_0\geq1$ such that, uniformly for $0<\alpha\leq1/2$ and all sufficiently large $L$,
+\[
+E_\alpha(L)
+\leq
+C_0\left(
+\alpha L+\frac{L}{\log L}
++L^{(1+\alpha)/2}(\log L)^2
+\right).
+\]
+The lower threshold for $L$ may be chosen independently of $\alpha$.
+\end{lemma}
+
+\begin{proof}
+We begin by counting the roots of $f$ modulo $m$.  For $m\geq1$, write
+\[
+R(m)=\#\{a\pmod m:f(a)\equiv0\pmod m\}.
+\]
+The prime-power values from the previous section are
+\[
+R(2^e)=0\quad(e\geq1),
+\qquad
+R(5)=1,
+\qquad
+R(5^e)=0\quad(e\geq2),
+\]
+and, for $p\neq2,5$,
+\[
+R(p^e)=1+\chi_5(p)\quad(e\geq1).
+\]
+The Chinese remainder theorem therefore gives
+\begin{equation}\label{eq:R}
+R(m)=
+\begin{cases}
+2^{\omega(m/(m,5))},
+&\begin{array}{l}
+2\nmid m,\ 25\nmid m,\ \text{and}\\
+\chi_5(p)=1\text{ for every }p\mid m,\ p\neq5,
+\end{array}\\[3mm]
+0,&\text{otherwise}.
+\end{cases}
+\end{equation}
+
+Now fix $m\leq L^\alpha$ and a root $a\pmod m$, represented by
+$0\leq a<m$.  Every integer $i\equiv a\pmod m$ can be written as
+$i=a+mt$.  Accordingly, let
+\[
+i=a+mt,
+\qquad
+T_{a,m}=\{t\in\mathbb Z:1\leq a+mt\leq L\},
+\qquad
+H=|T_{a,m}|.
+\]
+The length of this interval of $t$ values is
+\[
+H=\frac Lm+O(1),
+\qquad
+H\asymp\frac Lm,
+\qquad
+H\geq L^{1/2}-1.
+\]
+Since $m\mid f(a)$, we can divide $f(a+mt)$ by $m$ and obtain the integral
+polynomial
+\[
+G_{a,m}(t)=\frac{f(a+mt)}m
+=mt^2+(2a+3)t+\frac{f(a)}m.
+\]
+This polynomial has discriminant $5$.  It is also primitive.  Indeed, if a
+prime divided all three coefficients, then its square would divide
+$(2a+3)^2-4f(a)=5$, which is impossible.
+
+If $\ell\nmid10m$ is prime, then the affine map $t\mapsto a+mt$ is a
+bijection modulo $\ell$.  Consequently,
+\[
+\#\{t\pmod\ell:G_{a,m}(t)\equiv0\pmod\ell\}
+=1+\chi_5(\ell).
+\]
+Let
+\[
+\mathcal P_0=\{\ell:\ell\text{ is prime and }\ell\nmid10\},
+\qquad
+\mathcal P_m=\{\ell\in\mathcal P_0:\ell\nmid m\},
+\]
+and extend $\rho$ multiplicatively to squarefree integers supported on
+$\mathcal P_m$, with $\rho(d)=0$ otherwise.  For supported squarefree $d$,
+counting the root classes inside $T_{a,m}$ gives
+\begin{equation}\label{eq:localcount}
+\#\{t\in T_{a,m}:d\mid G_{a,m}(t)\}
+=H\frac{\rho(d)}d+r_d,
+\qquad
+|r_d|\leq\rho(d).
+\end{equation}
+
+\subsection{Application of the fundamental lemma}
+
+We apply the fundamental lemma with constants independent of $m$ and
+$a$. Define the nonnegative weights
+\[
+a_n=\#\{t\in T_{a,m}:G_{a,m}(t)=n\},
+\qquad X_{a,m}=\sum_n a_n=H.
+\]
+Thus, repeated values of $G_{a,m}$ are counted with their multiplicities.
+For $d$ supported on $\mathcal P_m$, equation \eqref{eq:localcount} says
+\[
+\sum_{\substack{n\geq1\\d\mid n}}a_n
+=H\frac{\rho(d)}d+r_d.
+\]
+This is precisely Axiom~1 of \cite[pp.~185--186]{Koukoulopoulos}, with local
+density $\nu(d)=\rho(d)$ and remainder $r_d$.  We also have
+$0\leq\rho(\ell)<\ell$ for every $\ell\in\mathcal P_m$.
+
+To check the dimension condition, Mertens's estimate and
+\eqref{eq:chi} give, uniformly for $w\geq2$,
+\begin{equation}\label{eq:weightedrho}
+\sum_{\substack{\ell\leq w\\ \ell\nmid10}}
+\frac{\rho(\ell)\log\ell}{\ell}
+=\sum_{\ell\leq w}\frac{\log\ell}{\ell}
++\sum_{\ell\leq w}\chi_5(\ell)\frac{\log\ell}{\ell}
++O(1)
+=\log w+O(1).
+\end{equation}
+Thus, every finite truncation of the base prime set $\mathcal P_0$ satisfies
+Axiom~$2'$ of \cite[p.~188]{Koukoulopoulos} with $\kappa=1$, uniformly in
+the truncation point.  The additional local condition in that axiom holds,
+for example, with $k=2$ and $\varepsilon=1/2$, since
+$\rho(\ell)\in\{0,2\}$ and every prime in $\mathcal P_0$ for which
+$\rho(\ell)=2$ is at least $11$.  The cited source therefore gives Axiom~2
+for every finite truncation of $\mathcal P_0$, with the same absolute
+constant $C$.
+
+To obtain Axiom~2 for $\mathcal P_m$, observe that deleting primes
+can only decrease its defining product. If
+$3/2\leq y_1\leq y_2$, then
+\[
+\prod_{\substack{\ell\in\mathcal P_m\cap(y_1,y_2]}}
+\left(1-\frac{\rho(\ell)}\ell\right)^{-1}
+\leq
+\prod_{\substack{\ell\in\mathcal P_0\cap(y_1,y_2]}}
+\left(1-\frac{\rho(\ell)}\ell\right)^{-1}.
+\]
+The same inequality holds for each finite truncation. Axiom~2 for
+$\mathcal P_0$ therefore gives Axiom~2 for $\mathcal P_m$, with the
+same absolute constants. In particular, these constants are independent
+of $m$ and $a$.
+
+Set $z=H^{1/20}$ and
+\[
+\mathcal Q_{m,z}=\{\ell\in\mathcal P_m:\ell\leq z\},
+\qquad
+P_m(z)=\prod_{\ell\in\mathcal Q_{m,z}}\ell.
+\]
+For sufficiently large $L$, we have $z<L$.  Therefore, every prime value
+$G_{a,m}(t)>L$ is counted by the sifted set
+$\{t\in T_{a,m}:(G_{a,m}(t),P_m(z))=1\}$.  Let $S_{a,m}$ denote the number
+of $t\in T_{a,m}$ for which $G_{a,m}(t)$ is a prime exceeding $L$.  If
+$\mathcal Q_{m,z}$ is empty, the estimate below is immediate.  Otherwise,
+let $y$ be its largest prime.  We apply
+\cite[Theorem 18.11(a), p.~190]{Koukoulopoulos} to the finite prime set
+$\mathcal Q_{m,z}$ with $u=10$.  In the notation of that theorem, its main
+term is
+\[
+\left(1+O_{\kappa,C}(u^{-u/2})\right)H V_m(z),
+\]
+and its remainder is bounded by
+\[
+O\left(\sum_{\substack{d\leq y^u\\d\mid P_m(z)}}|r_d|\right).
+\]
+Since $y\leq z$, we have $y^u\leq z^{10}=H^{1/2}$.  Taking an upper bound
+and enlarging the remainder sum, we obtain
+\begin{equation}\label{eq:Sam}
+S_{a,m}
+\ll
+HV_m(z)
++\sum_{\substack{d\leq H^{1/2}\\ d\mid P_m(z)}}|r_d|
+\leq HV_m(z)+\sum_{d\leq H^{1/2}}\rho(d),
+\end{equation}
+where
+\[
+V_m(z)=
+\prod_{\substack{\ell\leq z\\ \ell\nmid10m}}
+\left(1-\frac{\rho(\ell)}\ell\right).
+\]
+For the remainder, $\rho(d)\leq\tau(d)$ gives
+\[
+\sum_{d\leq H^{1/2}}\rho(d)
+\leq\sum_{ab\leq H^{1/2}}1
+\ll H^{1/2}\log H.
+\]
+It remains to estimate the sieve product.  First put
+\[
+V_0(z)=\prod_{\substack{\ell\leq z\\ \ell\nmid10}}
+\left(1-\frac{\rho(\ell)}\ell\right).
+\]
+By \eqref{eq:split} and the convergence of $\sum_p p^{-2}$, we have
+\[
+\log V_0(z)
+=\sum_{\substack{\ell\leq z\\ \chi_5(\ell)=1}}
+\log\left(1-\frac2\ell\right)
+=-2\sum_{\substack{\ell\leq z\\ \chi_5(\ell)=1}}\frac1\ell+O(1)
+=-\log\log z+O(1).
+\]
+To account for the primes dividing $m$, define
+\[
+h(m)=
+\prod_{\substack{p\mid m,\ p\neq5\\ \chi_5(p)=1}}
+\left(1-\frac2p\right)^{-1}.
+\]
+Then, omitting from $V_0(z)$ the primes that divide $m$ gives
+\[
+V_m(z)
+=V_0(z)
+\prod_{\substack{\ell\mid m,\ \ell\leq z\\
+\ell\neq5,\ \chi_5(\ell)=1}}
+\left(1-\frac2\ell\right)^{-1}
+\ll\frac{h(m)}{\log z}
+\ll\frac{h(m)}{\log L}
+\]
+uniformly for $m\leq L^\alpha$.  The last comparison follows from
+$H\geq L^{1/2}-1$, which gives $\log z\asymp\log L$.  Substituting this into
+\eqref{eq:Sam}, we obtain
+\begin{equation}\label{eq:Sam2}
+S_{a,m}
+\ll
+\frac{Hh(m)}{\log L}+H^{1/2}\log L.
+\end{equation}
+
+\subsection{Summation over complementary factors}
+
+If $i$ is counted by $E_\alpha(L)$,
+then for at least one representation $f(i)=mq$, the residue class
+$a\equiv i\pmod m$ is one of the $R(m)$ roots and $G_{a,m}(t)=q$ for the
+corresponding $t$. Summing over $m$ and its root classes gives an upper
+bound, since an index may have more than one such representation.
+Since $m\leq L^\alpha\leq L^{1/2}$, we also have
+\[
+H\leq\frac Lm+1\leq\frac{2L}{m}.
+\]
+Put $Y:=L^\alpha$.  Equation \eqref{eq:Sam2} now gives
+\begin{equation}\label{eq:Esum}
+E_\alpha(L)
+\ll
+\frac{L}{\log L}
+\sum_{m\leq Y}\frac{R(m)h(m)}m
++L^{1/2}\log L
+\sum_{m\leq Y}\frac{R(m)}{\sqrt m}.
+\end{equation}
+The two sums on the right are estimated separately.  For the first, define
+$g(m)=R(m)h(m)$.  Equation \eqref{eq:R} and the definition of $h$ show that
+$g$ is nonnegative and multiplicative, and that it vanishes outside the
+admissible support.  If $p\neq5$ and $\chi_5(p)=1$, then
+\[
+1+\sum_{e\geq1}\frac{g(p^e)}{p^e}
+=1+\frac{2p}{(p-1)(p-2)}
+=1+\frac2p+O(p^{-2}).
+\]
+The prime $5$ contributes the bounded local factor $1+1/5$, while inert
+primes and $2$ contribute $1$.  Therefore, positivity, the Euler product,
+and \eqref{eq:split} give, for $Y\geq1$,
+\begin{align*}
+\sum_{m\leq Y}\frac{R(m)h(m)}m
+&\leq
+\prod_{p\leq Y}\left(1+\sum_{e\geq1}\frac{g(p^e)}{p^e}\right)\\
+&\ll
+\exp\left(
+2\sum_{\substack{p\leq Y\\ \chi_5(p)=1}}\frac1p+O(1)
+\right)
+\ll\log(2Y).
+\end{align*}
+For the second sum, we use $R(m)\leq\tau(m)$.  Thus,
+\begin{align*}
+\sum_{m\leq Y}\frac{R(m)}{\sqrt m}
+&\leq
+\sum_{ab\leq Y}\frac1{\sqrt{ab}}\\
+&\ll
+\sum_{a\leq Y}\frac1{\sqrt a}\sqrt{\frac Ya}
+\ll\sqrt Y\log(2Y).
+\end{align*}
+Finally,
+\[
+\log(2Y)\leq\alpha\log L+O(1),
+\]
+uniformly for $0<\alpha\leq1/2$.  Substitution of these bounds into
+\eqref{eq:Esum} gives
+\[
+E_\alpha(L)
+\ll \alpha L+\frac{L}{\log L}
++L^{(1+\alpha)/2}(\log L)^2,
+\]
+with an absolute implied constant and an $L$-threshold independent of
+$\alpha$.  This proves the lemma.
+\end{proof}
+
+\section{Covers from quadratic congruences}\label{sec:construction}
+
+We now combine Lemmas~\ref{lem:largeprime} and \ref{lem:smallcofactor}.
+We choose disjoint pairs with distinct primes and assign individual
+primes to the remaining indices.
+
+\begin{proposition}\label{prop:quadratic-cover}
+Let $C_0$ be as in Lemma~\ref{lem:smallcofactor}, and set
+\[
+\alpha_0=\frac1{1000C_0},
+\qquad
+\delta_0=\frac{\alpha_0}{200},
+\qquad
+\eta_0=\frac{\delta_0}{2}.
+\]
+For every sufficiently large $L$, there exist a set
+$I\subseteq\{2,\ldots,L-2\}$, distinct primes $q_i$ for $i\in I$, and
+distinct primes $r_k$, indexed by
+\[
+U=\{2,\ldots,L\}\setminus\bigcup_{i\in I}\{i,i+2\}.
+\]
+Put
+\[
+M=\prod_{i\in I}q_i\prod_{k\in U}r_k.
+\]
+These objects satisfy the following conditions:
+\begin{enumerate}
+\item The pairs $\{i,i+2\}$, $i\in I$, are pairwise disjoint, and
+$|I|\geq L/100$.
+\item For every $i\in I$,
+\[
+L<q_i<2L^{2-\alpha_0},
+\qquad
+q_i\mid f(i).
+\]
+\item For every $k\in U$,
+\[
+L<r_k\leq20L\log L.
+\]
+\item The primes $q_i$, $i\in I$, and $r_k$, $k\in U$, are pairwise
+distinct.
+\item The modulus $M$ satisfies
+\[
+\log M\leq(1-\delta_0)L\log L,
+\qquad
+M\leq ((L+1)!)^{1-\eta_0}.
+\]
+\end{enumerate}
+Moreover, every prime divisor of $M$ is less than $L!$.
+\end{proposition}
+
+\begin{proof}
+The choice of $\alpha_0$ in the proposition and
+Lemma~\ref{lem:smallcofactor} give
+\[
+C_0\alpha_0L=\frac L{1000}.
+\]
+Since $\alpha_0<1$ is fixed, we also have
+\[
+C_0\left(\frac L{\log L}
++L^{(1+\alpha_0)/2}(\log L)^2\right)=o(L).
+\]
+Consequently,
+\[
+E_{\alpha_0}(L)\leq\frac L{500}
+\]
+for sufficiently large $L$.  On the other hand,
+Lemma~\ref{lem:largeprime} supplies at least $L/5$ indices $i\leq L$ for
+which
+\[
+q_i:=P^+(f(i))>\frac18i\log i.
+\]
+We discard the indices $i<L/10$, the two endpoints $L-1,L$, and those
+counted by $E_{\alpha_0}(L)$.  The number remaining is at least
+\[
+\frac L5-\frac L{10}-\frac L{500}-2
+=\frac{49L}{500}-2
+\geq\frac{9L}{100}
+\]
+for sufficiently large $L$.  For every remaining index,
+\[
+q_i>\frac18 i\log i
+\geq \frac{L}{80}\log\left(\frac{L}{10}\right)>L
+\]
+once $L$ is sufficiently large.  Write $f(i)=m_iq_i$.  Then
+$m_i>L^{\alpha_0}$, since otherwise this index would be counted by
+$E_{\alpha_0}(L)$.  Since $f(i)<2L^2$ for $i\leq L$, it follows that
+\[
+q_i<2L^{2-\alpha_0}.
+\]
+The identity \eqref{eq:keyidentity} now gives
+\[
+i!\equiv(i+2)!\pmod{q_i}.
+\]
+
+For each remaining index $i$, let
+\[
+F_i=(q_i,i!,B_i),
+\qquad B_i=\{i,i+2\}.
+\]
+The identity above shows that $B_i\subseteq E_{q_i,i!}$.  We apply
+Proposition~\ref{prop:conflict-selection}.  Two designated pairs
+$\{i,i+2\}$ and $\{j,j+2\}$ intersect only when $j=i$ or $j=i\pm2$.
+Thus, a fixed vertex of the auxiliary conflict graph has at most two
+neighbors arising from an overlap of designated pairs.
+
+A fixed prime $q>L$ occurs for at most two starting indices, because all
+starts are less than $q$ and $f$ has at most two roots modulo $q$.  Hence a
+fixed vertex has at most one additional neighbor of the same prime color.
+The conflict graph therefore has maximum degree at most $3$.
+Proposition~\ref{prop:conflict-selection}, with unit weights, gives at least
+\[
+\frac14\cdot\frac{9L}{100}=\frac{9L}{400}
+\]
+vertices whose associated edges have distinct colors and whose designated
+pairs are pairwise disjoint.  For
+sufficiently large $L$, we may therefore choose a subfamily indexed by a set
+$I$ with
+\[
+|I|=\left\lceil\frac L{100}\right\rceil.
+\]
+
+The set of remaining indices has cardinality $|U|=L-1-2|I|$.  The prime
+number theorem gives
+\[
+\pi(20L\log L)-\pi(L)>2L
+\]
+for sufficiently large $L$.  After excluding the $|I|$ primes already used
+for pairs, more than $2L-|I|>|U|$ primes remain.  Therefore, we may assign a
+distinct prime $r_k\in(L,20L\log L]$ to every $k\in U$.
+
+It remains to estimate the product of the selected primes.  Put $r=|I|$ and
+$s=|U|=L-1-2r$.  Then
+\begin{align*}
+\log M
+&\leq
+r\bigl((2-\alpha_0)\log L+\log2\bigr)
++s\bigl(\log L+\log\log L+\log20\bigr)\\
+&=(L-1-\alpha_0r)\log L+s\log\log L+O(L)\\
+&\leq
+\left(L-1-\frac{\alpha_0L}{100}\right)\log L
++L\log\log L+O(L).
+\end{align*}
+For sufficiently large $L$, the lower order terms satisfy
+\[
+L\log\log L+O(L)
+\leq\frac{\alpha_0}{200}L\log L,
+\]
+and therefore
+\[
+\log M
+\leq
+\left(1-\frac{\alpha_0}{200}\right)L\log L.
+\]
+This is the first estimate in the proposition because
+$\delta_0=\alpha_0/200$.
+Since
+\[
+\log((L+1)!)=L\log L-L+O(\log L),
+\]
+we have $\log((L+1)!)\geq L\log L-2L$ for sufficiently large $L$.  Since
+$\eta_0=\delta_0/2$, we obtain
+\begin{align*}
+(1-\eta_0)\log((L+1)!)-\log M
+&\geq
+(1-\eta_0)(L\log L-2L)-(1-\delta_0)L\log L\\
+&=(\delta_0-\eta_0)L\log L-2(1-\eta_0)L>0
+\end{align*}
+for sufficiently large $L$.  This proves
+$M\leq((L+1)!)^{1-\eta_0}$.  The displayed ranges also show that every
+selected prime is less than $L!$ once $L$ is sufficiently large.
+Choosing $L$ above all the preceding absolute thresholds proves the
+proposition.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:covercost}]
+Choose the sets and primes from Proposition~\ref{prop:quadratic-cover}.  For
+each $i\in I$, the identity \eqref{eq:keyidentity} and the divisibility
+$q_i\mid f(i)$ give
+\[
+i!\equiv(i+2)!\pmod{q_i}.
+\]
+Hence the edge $e_{q_i,i!}$ covers both $i$ and $i+2$.  For each $k\in U$,
+the edge $e_{r_k,k!}$ covers $k$.  All the primes are distinct, so these
+edges form a rainbow edge cover $\mathcal C_L$.  Proposition
+\ref{prop:quadratic-cover} gives
+\[
+\kappa(L)\leq w(\mathcal C_L)
+=\log M\leq(1-\delta_0)L\log L.
+\]
+Taking $\delta=\delta_0$ proves the theorem.
+\end{proof}
+
+
+\subsection{Excluding a set of primes}
+The proof of Proposition~\ref{prop:quadratic-cover} gives more pairs
+than the construction uses. We can therefore discard a prescribed set
+of primes and still obtain the same bound. We also record how the
+weight depends on the number of chosen pairs.
+
+\begin{theorem}\label{thm:robust}
+Let $\alpha_0,\delta_0,\eta_0$ be as in
+Proposition~\ref{prop:quadratic-cover}. There is an absolute $L_2$ such
+that, for every $L\geq L_2$ and every set $\mathcal F_0$ of at most
+$\lfloor L/100\rfloor$ primes, the following holds. For each integer
+\[
+0\leq r\leq\lceil L/100\rceil,\qquad s=L-1-2r,
+\]
+there are $r$ disjoint designated pairs with distinct primes
+$q_i\in(L,2L^{2-\alpha_0})\setminus\mathcal F_0$ and $s$ distinct
+singleton primes in $(L,20L\log L]\setminus\mathcal F_0$, all different
+from the pair primes, giving a full cover of modulus $M$ with
+\begin{equation}\label{eq:robustcost}
+\log M\leq (L-1-\alpha_0r)\log L+s\log\log L+L\log20.
+\end{equation}
+All selected primes are at most $L^2$ and less than $L!$.
+For $r=\lceil L/100\rceil$ one has, uniformly in $\mathcal F_0$,
+\[
+\log M\leq(1-\delta_0)L\log L,
+\qquad M\leq((L+1)!)^{1-\eta_0}.
+\]
+\end{theorem}
+\begin{proof}
+The proof of Proposition~\ref{prop:quadratic-cover}, before the final
+subfamily is taken, provides at least $9L/400$ pairwise disjoint
+pairs with distinct prime colors. Deleting all colors in $\mathcal F_0$
+removes at most $L/100$ pairs, leaving at least $L/80$.
+This is more than $\lceil L/100\rceil$ for large $L$, so any indicated
+number $r$ may be retained.
+
+The prime number theorem gives more than $2L$ primes in
+$(L,20L\log L]$ for all sufficiently large $L$. Excluding the forbidden
+primes and the $r$ pair colors still leaves more than $s$ choices.
+The logarithmic calculation is
+\[
+\begin{aligned}
+\log M
+&\leq r((2-\alpha_0)\log L+\log2)
++s(\log L+\log\log L+\log20)\\
+&\leq(L-1-\alpha_0r)\log L+s\log\log L+L\log20.
+\end{aligned}
+\]
+For $r=\lceil L/100\rceil$, the last two terms are absorbed exactly as
+in Proposition~\ref{prop:quadratic-cover}. Since $\alpha_0>0$ is fixed,
+$2L^{2-\alpha_0}\leq L^2$ and $20L\log L\leq L^2<L!$ eventually.
+Every threshold depends only on the original absolute constants, not on
+the size of the forbidden primes or on their locations.
+\end{proof}
+
+\begin{corollary}[Counting the moduli]\label{cor:modulifamily}
+Under the hypotheses of Theorem~\ref{thm:robust}, put
+$r=\lceil L/100\rceil$, $s=L-1-2r$, and $N=\lfloor L/80\rfloor$.
+For all sufficiently large $L$, there are at least
+\[
+\binom Nr\binom{4L}s\geq2^L
+\]
+distinct moduli for full covers satisfying its stated power bound and avoiding
+$\mathcal F_0$. They support a probability law such that, for every
+integer $d\geq1$,
+\[
+\mathbb P(d\mid M)\leq(9/10)^{\omega(d)}.
+\]
+\end{corollary}
+\begin{proof}
+Fix $N$ of the surviving pair colors. The prime number theorem gives
+$(20+o(1))L$ primes in $(L,20L\log L]$, so choose a pool of $4L$ primes
+avoiding $\mathcal F_0$ and all $N$ pair colors. Select an $r$-subset of
+the pair pool and an $s$-subset of the singleton pool, uniformly and
+independently. Every choice gives a cover after assigning its singleton
+primes to the remaining indices. Unique factorization recovers both
+selected subsets from $M$, proving the number of distinct moduli.
+Also $\binom{4L}s\geq(4L/s)^s\geq4^s\geq2^L$ eventually.
+
+If $d$ has a repeated prime factor or a factor outside the pools, its
+divisibility probability is zero. Otherwise, if it uses $u$ pair primes
+and $v$ singleton primes, the probability is
+\[
+\frac{(r)_u}{(N)_u}\frac{(s)_v}{(4L)_v},
+\]
+interpreted as zero if too many primes are prescribed.
+Here $(a)_j=a(a-1)\cdots(a-j+1)$, and $(a)_0=1$.
+Sampling without replacement bounds the ratios by $(r/N)^u$ and
+$(s/(4L))^v$. Eventually $r/N\leq9/10$ and $s/(4L)\leq1/4$, proving
+the assertion.
+\end{proof}
+
+\section{Counting covering classes}\label{sec:ensemble}
+
+Different assignments of indices to primes can give the same residue
+class. To count distinct classes, we first bound how often a factorial
+residue occurs. The estimates hold for every prime $q>L$.
+
+\subsection{Equal factorial residues}
+For $U\subseteq\{1,\ldots,L\}$, put
+\[
+m_{q,U}(a)=\#\{k\in U:k!\equiv a\pmod q\},
+\qquad
+\mathcal E_q(U)=\sum_{a\bmod q}m_{q,U}(a)^2.
+\]
+
+\begin{proposition}\label{prop:fibresize}
+For every prime $q>L$ and $a\pmod q$,
+\[
+m_{q,\{1,\ldots,L\}}(a)
+\leq F(L):=\min_{1\leq h\leq L}
+\left(\left\lceil\frac Lh\right\rceil+\frac{h(h-1)}2\right).
+\]
+In particular,
+\[
+F(L)\leq\frac32L^{2/3}+O(L^{1/3}).
+\]
+\end{proposition}
+\begin{proof}
+Partition $\{1,\ldots,L\}$ into $\lceil L/h\rceil$ consecutive blocks of
+length at most $h$. Within each block join consecutive occurrences of
+$a$. If $m$ is their total number, this produces at least
+$m-\lceil L/h\rceil$ links. A link of length $d<h$ starting at $i$ gives
+\[
+\prod_{j=1}^d(i+j)-1\equiv0\pmod q.
+\]
+The polynomial is monic of degree $d$, and the starting indices are
+distinct modulo $q$. There are therefore at most $d$ such links, over
+all blocks together. Summing over $d$ gives the finite bound.
+Taking $h=\lceil L^{1/3}\rceil$ gives the asymptotic estimate.
+\end{proof}
+
+\begin{corollary}\label{cor:globallower}
+For every sufficiently large $L$,
+\[
+\kappa(L)\geq\frac{L-1}{F(L)}\log(L+1)
+\geq(2/3-o(1))L^{1/3}\log L.
+\]
+\end{corollary}
+\begin{proof}
+A cover using $m$ prime colors covers at most $mF(L)$ vertices.
+Thus $mF(L)\geq L-1$, and each color costs at least $\log(L+1)$.
+\end{proof}
+
+\begin{lemma}\label{lem:energy}
+For every $L\geq1$, every prime $q>L$, and every
+$U\subseteq\{1,\ldots,L\}$,
+\[
+\mathcal E_q(U)\leq6L^{3/2}.
+\]
+\end{lemma}
+\begin{proof}
+Let $h=\lceil\sqrt L\rceil$ and partition the interval into
+$b=\lceil L/h\rceil$ blocks. Write $m_{a,B}$ for the occurrences of
+residue $a$ from $U$ in block $B$. Cauchy--Schwarz gives
+\[
+\mathcal E_q(U)\leq b\sum_{a,B}m_{a,B}^2.
+\]
+The diagonal terms total $|U|$. For distance $1\leq d<h$, the
+polynomial in the previous proof has at most $d$ possible starts, so
+there are at most $d$ equal-residue unordered pairs of this distance
+within the blocks. Consequently,
+\[
+\mathcal E_q(U)\leq b\bigl(|U|+h(h-1)\bigr)
+\leq(\sqrt L+1)(2L+\sqrt L)\leq6L^{3/2}.
+\]
+The estimate counts ordered pairs, including equal indices.
+\end{proof}
+
+The $L^{3/2}$ order of Lemma~\ref{lem:energy} is also the $\ell=1$
+case of \cite[Theorem~1]{GaraevLucaShparlinski}, with their interval
+starting at $0$ and containing $L$ indices. The proof above gives the
+stated constant uniformly in $q$.
+
+\subsection{Images of permutations}
+
+\begin{lemma}\label{lem:permutationimage}
+Let $U$ have $s\geq1$ elements, and let $f_j:U\to\Omega_j$ be maps to
+finite sets, for $1\leq j\leq s$. Define
+\[
+E_j=\#\{(u,v)\in U^2:f_j(u)=f_j(v)\}.
+\]
+As $(u_1,\ldots,u_s)$ ranges over all permutations of $U$, the number
+$N$ of distinct vectors $(f_1(u_1),\ldots,f_s(u_s))$ satisfies
+\[
+N\geq\frac{s!\,s^s}{\prod_{j=1}^s E_j}.
+\]
+\end{lemma}
+\begin{proof}
+For a vector $z$ in the image, let $n_z$ be its number of preimages, and put
+$p_z=n_z/s!$. If $m_j(v)=|f_j^{-1}(v)|$, then
+$n_z\leq\prod_jm_j(z_j)$, since allowing repeated elements only
+increases the number of possible preimages.
+For a uniform random permutation, its $j$th entry is uniform on $U$.
+Thus
+\[
+\mathbb E\,m_j(f_j(u_j))=E_j/s.
+\]
+Concavity of the logarithm gives
+\[
+\begin{aligned}
+\log(s!)
+&=\sum_zp_z\log(1/p_z)+\sum_zp_z\log n_z\\
+&\leq\log N+\sum_j\mathbb E\log m_j(f_j(u_j))\\
+&\leq\log N+\sum_j\log(E_j/s).
+\end{aligned}
+\]
+For the first inequality, Jensen's inequality gives
+\[
+\sum_zp_z\log(1/p_z)\leq\log\left(\sum_z p_z\frac1{p_z}\right)=\log N.
+\]
+Rearranging and exponentiating proves the lemma.
+\end{proof}
+
+\begin{theorem}[Covering classes for a fixed modulus]
+\label{thm:ensemble}
+For all sufficiently large $L$, let $\mathcal F_0$ be any set of at most
+$\lfloor L/100\rfloor$ primes and let
+$0\leq r\leq\lceil L/100\rceil$, $s=L-1-2r$.
+There exist a modulus $M$ satisfying \eqref{eq:robustcost} and a set
+$\mathcal A\subseteq(\mathbb Z/M\mathbb Z)^\times$ such that every
+$a\in\mathcal A$ covers all indices $2\leq k\leq L$ by primes dividing
+$M$, no prime in $\mathcal F_0$ divides $M$, and
+\begin{equation}\label{eq:ensemblecount}
+|\mathcal A|\geq
+\frac{s!\,s^s}{(6L^{3/2})^s}
+\geq\left(\frac{s^2}{6eL^{3/2}}\right)^s.
+\end{equation}
+For each fixed $0<\rho\leq1/100$, taking $r=\lceil\rho L\rceil$ gives
+\[
+M\leq X^{1-\alpha_0\rho/4},\qquad
+|\mathcal A|\geq X^{1/2-\rho-o(1)},\qquad X=(L+1)!.
+\]
+The error term is uniform in $\mathcal F_0$.
+\end{theorem}
+\begin{proof}
+Fix the pairs and the $s$ singleton primes $p_1,\ldots,p_s$ from
+Theorem~\ref{thm:robust}. Let $U$ be the indices not in the pairs.
+Keep the pair congruences fixed. For each permutation
+$(u_1,\ldots,u_s)$ of $U$, impose
+\[
+a\equiv u_j!\pmod{p_j}\qquad(1\leq j\leq s).
+\]
+Each system is compatible and reduced, and covers all the remaining
+indices. All systems have the same modulus $M$. By CRT, different
+vectors of singleton residues give different classes modulo $M$.
+Apply Lemma~\ref{lem:permutationimage} to $f_j(u)=u!\bmod p_j$ and
+then Lemma~\ref{lem:energy}. The last inequality in
+\eqref{eq:ensemblecount} follows from $s!\geq(s/e)^s$.
+
+For fixed $\rho$, equation \eqref{eq:robustcost} gives
+$\log M\leq(1-\alpha_0\rho)L\log L+O(L\log\log L)$.
+Since $\log X=L\log L-L+O(\log L)$, this implies the asserted bound
+for $M$ after increasing the threshold. Also $s=(1-2\rho)L+O(1)$,
+so taking logarithms in \eqref{eq:ensemblecount} gives
+\[
+\log|\mathcal A|\geq(1/2-\rho)L\log L-O_\rho(L).
+\]
+This proves the fixed-$\rho$ assertions.
+\end{proof}
+
+\begin{corollary}\label{cor:halfensemble}
+Write $\alpha=\alpha_0$. For every sufficiently large $L$ and every
+forbidden set as in Theorem~\ref{thm:ensemble}, there are $M$ and
+$\mathcal A$ as in that theorem such that
+\[
+M\leq Xe^{-5L},\qquad
+|\mathcal A|\geq X^{1/2}
+\exp\left(-\frac3\alpha L\log\log L\right),\qquad X=(L+1)!.
+\]
+In particular, $|\mathcal A|\geq X^{1/2-o(1)}$.
+\end{corollary}
+\begin{proof}
+Choose
+\[
+r=\left\lceil\frac{L(\log\log L+10)}{\alpha\log L}\right\rceil.
+\]
+Since $\alpha>0$ is fixed, eventually $r\leq\lceil L/100\rceil$ and
+$s=L-1-2r\geq L/2$. Equation \eqref{eq:robustcost} yields
+\[
+\log M\leq L\log L-L(\log\log L+10)+L\log\log L+L\log20
+\leq L\log L-7L.
+\]
+As $\log X\geq L\log L-2L$ eventually, $M\leq Xe^{-5L}$.
+Taking logarithms in \eqref{eq:ensemblecount} and using $s\geq L/2$
+gives, with an absolute constant $C$,
+\[
+\begin{aligned}
+\log|\mathcal A|
+&\geq\tfrac12s\log L-CL\\
+&\geq\tfrac12L\log L-
+\frac{L}{\alpha}(\log\log L+10)-CL-\tfrac32\log L\\
+&\geq\tfrac12\log X-\frac3\alpha L\log\log L
+\end{aligned}
+\]
+for sufficiently large $L$. All estimates are uniform in the forbidden
+set. Finally $L\log\log L=o(\log X)$.
+\end{proof}
+\section{Triples with small span and lower bounds for covers}\label{sec:locality}
+
+The construction above groups indices in pairs. To reduce the weight
+further, one may try to use fibers containing three or more indices.
+We now bound the number of triples of equal factorial residues whose
+first and last indices are close together. We count a triple separately
+for each prime for which the equality holds.
+
+For $L\geq3$ and $1\leq D\leq L$, define
+\[
+T(L,D)=\sum_{\substack{q>L\\q\text{ prime}}}
+\#\{2\leq i<j<k\leq L:k-i\leq D,\ i!\equiv j!\equiv k!\pmod q\}.
+\]
+The sum is finite because each triple imposes divisibility of fixed
+nonzero integers. Put $\mathcal B(D)=0$ for $D\leq3$, and otherwise put
+\begin{equation}\label{eq:resultantbudget}
+\mathcal B(D)=\sum_{b=4}^D
+\left(\frac{b(b-3)}2\log2+
+\frac{b^3-13b+12}{6}\log b\right).
+\end{equation}
+
+\begin{theorem}\label{thm:shorttriples}
+For every $L\geq3$ and $1\leq D\leq L$,
+\[
+T(L,D)\leq\frac{\mathcal B(D)}{\log(L+1)}.
+\]
+Moreover,
+\[
+\mathcal B(D)=\frac{D^4}{24}\log D-\frac{D^4}{96}+O(D^3\log D).
+\]
+Thus for fixed $c>0$,
+\[
+T(L,\lfloor cL^{1/4}\rfloor)\leq(c^4/96+o(1))L,
+\]
+and $T(L,D)=o(L)$ whenever $D=o(L^{1/4})$.
+\end{theorem}
+
+\subsection{Common roots and resultants}
+For $d\geq1$, set
+\[
+P_d(x)=\prod_{j=1}^d(x+j)-1.
+\]
+The irreducibility of these polynomials is classical; it is recorded, for
+example, in the proof of \cite[Theorem~2.1]{KlurmanMunsch}. We give the
+proof together with the resultant bound needed below.
+
+\begin{lemma}\label{lem:resultantheight}
+The polynomials $P_d$ are irreducible over $\mathbb Q$. For $1\leq a<b$,
+\[
+0<|\operatorname{Res}(P_a,P_b)|\leq2^a b^{a(b-a)}.
+\]
+\end{lemma}
+\begin{proof}
+If $P_d=FG$ were a nontrivial factorization, Gauss's lemma would give
+monic integral factors, with $1\leq m:=\deg F\leq d/2$ after
+interchanging them. For $j=1,\ldots,d$, $F(-j)G(-j)=-1$, hence
+$F(-j)=\pm1$. Thus $F^2-1$ has $d$ distinct roots. If $2m<d$ this is
+impossible. If $2m=d$, monicity gives
+\[
+F^2-1=\prod_{j=1}^d(x+j)=P_d+1,
+\]
+so $P_d=F^2-2$. The divisibility $F\mid P_d$ would imply $F\mid2$,
+again impossible.
+
+The distinct degrees of the irreducible polynomials imply that their
+resultant is a nonzero integer. If $P_a(\zeta)=0$, then
+$\prod_{j=1}^a(\zeta+j)=1$, so $|\zeta+j_0|\leq1$ for some
+$j_0\leq a$. For $a<j\leq b$ this gives $|\zeta+j|\leq b$.
+Consequently,
+\[
+|P_b(\zeta)|=
+\left|\prod_{j=a+1}^b(\zeta+j)-1\right|
+\leq2b^{b-a}.
+\]
+The product of these bounds over the $a$ roots of $P_a$ is the asserted
+resultant bound.
+\end{proof}
+
+\begin{lemma}\label{lem:rootvaluation}
+If $F,G\in\mathbb Z[x]$ are monic nonconstant polynomials with nonzero
+resultant, then the number of their
+distinct common roots modulo a prime $q$ is at most
+$v_q(\operatorname{Res}(F,G))$.
+\end{lemma}
+\begin{proof}
+Let $m=\deg F$, $n=\deg G$, and consider the Sylvester map
+$(U,V)\mapsto UF+VG$, where $\deg U<n$ and $\deg V<m$.
+Monicity implies that the reductions have the same degrees, so the
+number $d$ of their distinct common roots is at most $\min(m,n)$.
+Every polynomial in the image vanishes at these roots. Evaluation at the $d$ points imposes
+$d$ independent linear conditions on polynomials of degree less than
+$m+n$. Thus the integer Sylvester matrix has rank deficiency at least
+$d$ modulo $q$.
+
+Lift invertible row operations over $\mathbb F_q$ to an integral matrix
+whose determinant is not divisible by $q$. At least $d$ rows of the
+resulting matrix are divisible by $q$, so its determinant is divisible
+by $q^d$. Its determinant differs from the original resultant by a
+$q$-adic unit. Hence $q^d\mid\operatorname{Res}(F,G)$.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:shorttriples}]
+Put $a=j-i$ and $b=k-i$. By Proposition~\ref{prop:criterion}, a triple
+collision gives a common root $i$ of $P_a$ and $P_b$ modulo $q$.
+For fixed $a,b,q$, the possible starts $2\leq i\leq L-b$ are distinct
+modulo $q>L$. Thus Lemma~\ref{lem:rootvaluation} bounds their number
+by $v_q(R_{a,b})$, where $R_{a,b}=\operatorname{Res}(P_a,P_b)$.
+Summing over $q>L$ gives
+\[
+\begin{aligned}
+\log(L+1)\sum_{q>L}\#\{\text{valid starts for }a,b,q\}
+&\leq\sum_{q>L}v_q(R_{a,b})\log q\\
+&\leq\log|R_{a,b}|\\
+&\leq a\log2+a(b-a)\log b.
+\end{aligned}
+\]
+Adjacent factorials do not collide in the index range: cancelling $i!$
+from $(i+1)!\equiv i!\pmod q$ would give $q\mid i$.
+Therefore $2\leq a\leq b-2$ and $b\geq4$. Summing the last bound over
+these gaps yields \eqref{eq:resultantbudget}, since
+\[
+\sum_{a=2}^{b-2}a=\frac{b(b-3)}2,
+\qquad
+\sum_{a=2}^{b-2}a(b-a)=\frac{b^3-13b+12}{6}.
+\]
+Finally, comparison with the integral gives
+\[
+\sum_{b\leq D}b^3\log b
+=\frac{D^4}{4}\log D-\frac{D^4}{16}+O(D^3\log D).
+\]
+The remaining sums in \eqref{eq:resultantbudget} are of lower order.
+This proves the expansion and its consequences. For bounded $D$, the
+$o(L)$ assertion follows directly from the finite bound.
+\end{proof}
+
+\subsection{Lower bounds for covers}
+We call a choice of one nonempty set
+$B_q\subseteq E_{q,a_q}$ for each selected prime, covering the indicated
+vertices, a \emph{designated cover}. These sets may overlap. A consecutive
+triple consists of three successive elements in the increasing
+enumeration of one $B_q$; the elements need not be consecutive integers.
+
+\begin{theorem}\label{thm:localcover}
+Let a designated cover have weight $w$, and let
+$n=|\bigcup_q B_q|$. Let $K_{>D}$ count its prime-labelled consecutive
+triples of span greater than $D$. Then
+\[
+K_{>D}\geq n-\frac{2w+\mathcal B(D)}{\log(L+1)}.
+\]
+In particular, if all its consecutive triples have span at most $D$,
+then
+\[
+w\geq\tfrac12\bigl(n\log(L+1)-\mathcal B(D)\bigr).
+\]
+\end{theorem}
+\begin{proof}
+Write $m$ for the number of selected primes and $b_q=|B_q|$.
+There are $\sum_q(b_q-2)_+\geq\sum_qb_q-2m\geq n-2m$
+consecutive triples. At most $T(L,D)$ of them have span at most $D$.
+They are distinct as prime-labelled triples, even when different colors
+have overlapping designated sets. Now apply Theorem~\ref{thm:shorttriples}
+and $m\leq w/\log(L+1)$.
+\end{proof}
+
+\begin{corollary}\label{cor:localcost}
+Suppose $c>0$ and $0\leq u<1$ are fixed, and a sequence of designated
+covers covers at least $(1-u)(L-1)$ indices. If every consecutive-triple span
+is at most $cL^{1/4}$, then
+\[
+\frac{w}{\log((L+1)!)}\geq\frac{1-u}{2}-\frac{c^4}{192}-o(1).
+\]
+For full covers this gives $1/2-c^4/192-o(1)$. If every span is
+$o(L^{1/4})$, the full-cover lower bound is $1/2-o(1)$.
+\end{corollary}
+\begin{proof}
+Use $D=\lfloor cL^{1/4}\rfloor$ in Theorem~\ref{thm:localcover} and
+$\log((L+1)!)=L\log L-L+O(\log L)$. For a full cover, use $n=L-1$
+directly. For a varying $D=o(L^{1/4})$, use $\mathcal B(D)/\log L=o(L)$.
+\end{proof}
+
+For example, if a full cover has $w\leq\theta\log((L+1)!)$ for a fixed
+$\theta<1/2$, then for each fixed $c>0$ it has at least
+\[
+(1-2\theta-c^4/96-o(1))L
+\]
+consecutive triples of span exceeding $cL^{1/4}$, counted with their
+primes, whenever the coefficient is positive.
+
+Suppose a designated set is connected by a graph whose edges join
+indices at distance at most $h$. Every consecutive gap in that set is
+then at most $h$, since a larger gap would disconnect the graph. Thus its
+consecutive-triple spans are at most $2h$, and the preceding inequalities
+apply with $D=\lfloor2h\rfloor$.
+\section{Rough integers in prescribed progressions}\label{sec:arithmetic}
+
+We now count rough integers in the residue classes given by a cover.
+The Chinese remainder theorem and inclusion--exclusion give the
+following estimate, which also allows a prescribed congruence.
+
+\begin{proposition}[Counting rough integers]\label{prop:counting}
+Let $L\geq2$, $W=\prod_{p\leq L}p$, and let $M,d\geq1$ satisfy
+$(M,dW)=1$. Suppose $(A,M)=(b,d)=1$. Put
+\[
+W_d=\prod_{p\leq L,\ p\nmid d}p,
+\qquad V_d(L)=\prod_{p\leq L,\ p\nmid d}(1-1/p).
+\]
+For real $u<v$, the number $N_{A,b}(u,v)$ of integers $n\in(u,v]$ with
+\[
+n\equiv A\pmod M,\qquad n\equiv b\pmod d,
+\qquad(n,W)=1
+\]
+satisfies
+\begin{equation}\label{eq:exactcount}
+\left|N_{A,b}(u,v)-\frac{v-u}{Md}V_d(L)\right|
+\leq2^{\omega(W_d)}.
+\end{equation}
+The bound is uniform in every displayed parameter.
+\end{proposition}
+\begin{proof}
+The two prescribed congruences give a unique class modulo $Md$.
+Primes dividing $d$ cannot divide $n$ because $(b,d)=1$.
+For each $e\mid W_d$, the additional condition $e\mid n$ gives a unique
+class modulo $Mde$, since $(e,Md)=1$. Its count in $(u,v]$ differs from
+$(v-u)/(Mde)$ by at most one. Inclusion--exclusion therefore gives
+\[
+N_{A,b}(u,v)=\sum_{e\mid W_d}\mu(e)
+\left(\frac{v-u}{Mde}+\epsilon_e\right),\qquad |\epsilon_e|\leq1.
+\]
+The main term factors as $\frac{v-u}{Md}\prod_{p\mid W_d}(1-1/p)$,
+and there are $2^{\omega(W_d)}$ error terms.
+\end{proof}
+
+Let $\mathcal A$ be a set of distinct classes modulo a common modulus
+$M$, each giving a full cover of $2!,\ldots,L!$ with primes below $L!$.
+Assume $(M,d)=1$ and $(b,d)=1$. For $X=(L+1)!$, formula
+\eqref{eq:exactcount} gives at least
+\begin{equation}\label{eq:ensembletransference}
+|\mathcal A|\left(
+\frac{X-2L!}{Md}V_d(L)-2^{\omega(W_d)}
+\right)
+\end{equation}
+$L$-rough integers in these classes and in $b\pmod d$.
+The classes are disjoint, because equality of the combined classes
+modulo $Md$ implies equality modulo $M$.
+
+All these integers satisfy the factorial-difference conditions. For
+$2\leq k\leq L$, some covering prime satisfies
+\[
+q\mid n-k!,\qquad 1<q<L!<n-k!.
+\]
+Thus it is a proper divisor. Roughness makes $n$ odd, and $n-1>2$,
+so the case $k=1$ follows as well.
+
+\subsection{Counting in one covering class}
+
+\begin{corollary}\label{cor:costcount}
+Let $G_L$ count the auxiliary solutions in $(2L!,X]$, $X=(L+1)!$.
+For every sufficiently large $L$,
+\[
+G_L\geq (X-2L!)e^{-\kappa(L)}
+\prod_{p\leq L}(1-1/p)-2^{\pi(L)}.
+\]
+More generally, for any fixed $\lambda>\log2$, uniformly over full
+covers with
+\[
+M\leq X\exp\left(-\lambda\frac{L}{\log L}\right),
+\]
+the number of $L$-rough integers in their single CRT class and in
+$(2L!,X]$ is
+\[
+(e^{-\gamma}+o(1))\frac{X-2L!}{M\log L},
+\]
+where $\gamma$ is Euler's constant. Every integer counted is an auxiliary
+solution. This is an asymptotic for the selected progression, not for
+all auxiliary solutions.
+\end{corollary}
+\begin{proof}
+Take $d=1$ and a minimum-cost cover in
+Proposition~\ref{prop:counting} for the first assertion.
+For the second, Mertens's product estimate gives
+$V_1(L)\sim e^{-\gamma}/\log L$, and the prime number theorem gives
+$2^{\pi(L)}=\exp((\log2+o(1))L/\log L)$.
+The main term in \eqref{eq:exactcount} divided by its error bound tends
+to infinity uniformly under the stated modulus condition, because
+$\lambda>\log2$. This proves the asymptotic. The classical estimates are
+\cite[Theorems~3.4(c) and~8.1]{Koukoulopoulos}.
+\end{proof}
+
+\begin{theorem}\label{thm:transference}
+Fix $0<\eta<1$. For every sufficiently large $L$, depending only on
+$\eta$, a full cover with $M\leq X^{1-\eta}$, $X=(L+1)!$, yields at
+least $X^\eta/(100\log L)$ auxiliary solutions in $(2L!,X]$.
+\end{theorem}
+\begin{proof}
+Use \eqref{eq:exactcount} with $d=1$ and the cover's CRT class.
+For sufficiently large $L$, $X-2L!\geq X/2$ and
+$V_1(L)\geq1/(4\log L)$. Moreover,
+\[
+2^{\pi(L)}=\exp(O(L/\log L))
+=o\left(\frac{X^\eta}{\log L}\right).
+\]
+The count is therefore at least $X/(16M\log L)$ for sufficiently
+large $L$, which exceeds the asserted bound. The argument preceding
+Corollary~\ref{cor:costcount} shows that all the required differences
+are composite.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+Decrease the constant $\delta$ in Theorem~\ref{thm:covercost} if
+necessary so that $0<\delta<1$, and put $\eta=\delta/2$.
+The minimum-cost cover exists for sufficiently large $L$ by
+Proposition~\ref{prop:baseline}. Since
+\[
+\log M=\kappa(L)\leq(1-\delta)L\log L,
+\qquad \log X=L\log L-L+O(\log L),
+\]
+one has $M\leq X^{1-\eta}$ eventually.
+Theorem~\ref{thm:transference} proves the assertion.
+\end{proof}
+
+\subsection{Counting in a prescribed residue class}
+
+\begin{proof}[Proof of Theorem~\ref{thm:abundance}]
+Write $\alpha=\alpha_0$. For a given $d\leq e^L$, let $\mathcal F_0$
+be the set of prime divisors of $d$ exceeding $L$. Then
+\[
+|\mathcal F_0|\log(L+1)\leq\log d\leq L,
+\]
+so $|\mathcal F_0|\leq\lfloor L/100\rfloor$ for all sufficiently large
+$L$, uniformly in $d$. Use Corollary~\ref{cor:halfensemble} avoiding this
+set. Its modulus satisfies
+\[
+(M,d)=1,\qquad M\leq Xe^{-5L},\qquad
+|\mathcal A|\geq X^{1/2}
+\exp\left(-\frac3\alpha L\log\log L\right).
+\]
+All selected primes exceed $L$, so $(M,W)=1$ as well.
+
+For any $(b,d)=1$, apply \eqref{eq:ensembletransference}.
+Since $d\leq e^L$, $V_d(L)\geq V_1(L)\geq1/(4\log L)$, and
+$2^{\omega(W_d)}\leq2^L$, the number of rough integers contributed by
+each combined class is at least
+\[
+\frac{e^{4L}}{8\log L}-2^L\geq1
+\]
+for all sufficiently large $L$. Hence the total is at least
+$|\mathcal A|$. The preceding argument gives compositeness of the
+factorial differences. Finally,
+\[
+\frac{(3/\alpha)L\log\log L}{\log X}\longrightarrow0.
+\]
+For each $\varepsilon>0$, increasing the threshold makes the lower
+bound at least $X^{1/2-\varepsilon}$. Every threshold is independent of
+$d$ and $b$, as required.
+\end{proof}
+\section{Computational examples and further questions}\label{sec:conclusion}
+
+\subsection{Examples of covers}
+The supplementary files contain full covers at three finite values of
+$L$. Each selected prime, residue, complete fiber, and designated subset
+is listed. The accompanying program recomputes the residues, checks
+primality by trial division, and verifies that the primes are distinct
+and the sets cover all indices. It checks the bounds below by comparing
+integer powers.
+
+\begin{center}
+\small
+\begin{tabular}{rrrrl}
+\toprule
+$L$ & Primes & Consecutive triples & Minimum span & Bound\\
+\midrule
+300 & 99 & 106 & 24 & $M^{100}<X^{46}$\\
+1000 & 296 & 411 & 39 & $M^{100}<X^{39}$\\
+3000 & 810 & 1383 & 30 & $M^{50}<X^{17}$\\
+\bottomrule
+\end{tabular}
+\end{center}
+Here $X=(L+1)!$, and the triples are consecutive triples of the designated
+subsets. In all three certificates every prime lies in $(L,L^2]$.
+No listed triple has span at most $\lfloor L^{1/4}\rfloor$.
+As one concrete example from the $L=300$ certificate,
+\[
+17!\equiv81!\equiv87!\equiv176!\equiv198!\equiv293!
+\equiv70\pmod{337}.
+\]
+These examples give the displayed bounds for $\kappa(L)$ at the three
+specified values. They give no asymptotic bound. The supplementary
+programs also check the inequality in Lemma~\ref{lem:permutationimage},
+the progression counts, and resultants for small degrees. These
+computations are separate from the proofs.
+
+\subsection{Further questions}
+The upper and lower bounds for the minimum weight are far apart:
+\[
+(2/3-o(1))L^{1/3}\log L
+\leq\kappa(L)\leq(1-\delta)L\log L.
+\]
+Our arguments do not determine its order or prove
+$\kappa(L)=o(L\log L)$. Corollary~\ref{cor:localcost} gives one
+restriction on improving the upper bound: a cover whose weight is less
+than half the leading weight of the individual assignments, by a fixed
+proportion, must contain a positive proportion of triples with large
+span. Choosing such triples with distinct primes and disjoint indices
+is a further problem.
+
+Proposition~\ref{prop:completion} gives a way to use additional equalities
+between factorial residues. A compatible family of designated subsets
+with a large total saving $\sum_F(|B_F|\log T-\log q_F)$ gives a cover
+of small weight, provided enough unused primes of size at most $T$ are
+available for the remaining indices. The difficulty is to find such
+subsets and choose them without repeating primes or indices. A lower
+bound for the number of distinct factorial residues alone does not give
+this choice.
+
+One can also ask how many covering classes a fixed modulus admits.
+Lemma~\ref{lem:permutationimage} bounds this number using counts of
+equal factorial residues at each prime. Stronger estimates for these
+counts may improve the $X^{1/2-o(1)}$ lower bound even if the bound for
+$\kappa(L)$ stays the same. The integers counted by this method are
+rough integers; primality is a separate condition.
+
+\section*{Acknowledgments}
+
+This work was carried out as part of the 2026 Research in Industrial Projects
+for Students program at the Institute for Pure \& Applied Mathematics,
+UCLA.  The author thanks IPAM for providing a collaborative research
+environment and acknowledges OpenAI, the industrial sponsor of the project,
+for its support and for providing access to the computational tools used
+during the project.
+
+\section*{Use of AI tools}
+
+The mathematical exploration and initial proof development used OpenAI's
+ChatGPT and Codex extensively. These tools also assisted with
+computation, literature searches, algebraic checks, and manuscript
+preparation. The author selected and reframed the problem, proposed the
+broader hypergraph interpretation, and directed the successive revisions.
+Aristotle (Harmonic) produced the Lean formalization of the original
+auxiliary theorem. The extent of that formalization is stated in the
+introduction.
+
+\begin{thebibliography}{99}
+
+\bibitem{BanksLucaShparlinskiStichtenoth}
+W.~D. Banks, F.~Luca, I.~E. Shparlinski, and H.~Stichtenoth,
+\emph{On the value set of $n!$ modulo a prime},
+Turkish J. Math. \textbf{29} (2005), no.~2, 169--174.
+
+\bibitem{Bloom}
+T.~F. Bloom,
+\emph{Erd\H{o}s Problem 1059},
+\href{https://www.erdosproblems.com/1059}
+{erdosproblems.com/1059}, accessed August 9, 2026.
+
+\bibitem{GaraevLucaShparlinski}
+M.~Z. Garaev, F.~Luca, I.~E. Shparlinski,
+\emph{Exponential sums and congruences with factorials},
+J. Reine Angew. Math. \textbf{584} (2005), 29--44.
+
+\bibitem{Guy}
+R.~K. Guy,
+\emph{Unsolved Problems in Number Theory},
+3rd ed., Problem Books in Mathematics, Springer, New York, 2004,
+Problem A2, pp.~10--12.
+
+\bibitem{Hu}
+X.~Hu,
+\emph{Factorial residues modulo a prime: beyond the square-root bound},
+\href{https://arxiv.org/abs/2608.01781}{arXiv:2608.01781} (2026).
+
+\bibitem{KlurmanMunsch}
+O.~Klurman and M.~Munsch,
+\emph{Distribution of factorials modulo $p$},
+J. Th\'eor. Nombres Bordeaux \textbf{29} (2017), no.~1, 169--177.
+
+\bibitem{Koukoulopoulos}
+D.~Koukoulopoulos,
+\emph{The Distribution of Prime Numbers},
+Graduate Studies in Mathematics, vol.~203,
+American Mathematical Society, Providence, RI, 2019.
+
+\bibitem{Land}
+J.~Land,
+\emph{A proposed solution to Erd\H{o}s Problem 1059: prime avoidance for a sparse set of shifts},
+preprint, September 5, 2026,
+\href{https://github.com/beetree/math_erdos_1059}
+{github.com/beetree/math\_erdos\_1059}.
+
+\bibitem{Palomar}
+Palomar Registry,
+\emph{Factorial-residue hypergraphs and an auxiliary problem of Erd\H{o}s},
+entry PALOMAR-2026-08-27-000003 v1,
+\href{https://palomar-registry.org/entry.html?id=PALOMAR-2026-08-27-000003&version=1}
+{palomar-registry.org}, 2026.
+
+\end{thebibliography}
+
+\end{document}

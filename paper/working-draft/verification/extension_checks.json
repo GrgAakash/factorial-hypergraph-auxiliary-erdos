@@ -1,0 +1,8 @@
+{
+  "scope": "Finite exact checks only; not formal verification or an asymptotic proof.",
+  "permutation_image_cases": 112,
+  "factorial_energy_and_fiber_cases": 3489,
+  "prescribed_progression_cases": 400,
+  "status": "PASS",
+  "displayed_fiber_mod_337": "PASS"
+}

@@ -4,6 +4,27 @@ This repository contains the Lean 4 formalization accompanying Aakash
 Gurung's manuscript *Factorial-residue hypergraphs and an auxiliary problem
 of Erdos*.
 
+## Current working draft
+
+**Working draft — exposition and mathematical review in progress.**
+Last updated: 7 September 2026.
+
+The expanded manuscript, *Factorial-residue hypergraphs and covering
+congruences*, is available as a
+[PDF](paper/working-draft/factorial_residue_covers_expanded.pdf) and
+[TeX source](paper/working-draft/factorial_residue_covers_expanded.tex).
+It has no author byline while exposition and review continue; the AI
+disclosure is retained. The accompanying
+[finite examples and checkers](paper/working-draft/README.md) are also included.
+
+The expanded draft contains additional results beyond the registered
+formalization. Palomar v1 covers the original quantitative auxiliary theorem,
+conditional on the explicitly stated standard upper-bound sieve theorem;
+it does not certify all results in this expanded manuscript. The original
+manuscript referenced by the formalization remains at
+[`paper/factorial_residue_hypergraphs.tex`](paper/factorial_residue_hypergraphs.tex).
+Updating this working draft does not change the registered commit.
+
 ## Result submitted to Palomar
 
 For a positive integer `L`, call `n` **`L`-rough** when every prime divisor of
@@ -50,7 +71,8 @@ to Koukoulopoulos, *The Distribution of Prime Numbers*, Theorem 18.11(a), at
 sieve dimension one and `u = 10`; see
 [`docs/SIEVE_SOURCE_AUDIT.md`](docs/SIEVE_SOURCE_AUDIT.md).
 
-All problem-specific steps after that classical theorem are formalized.  In
+All problem-specific steps for the registered auxiliary theorem after that
+classical theorem are formalized. In
 particular, the quadratic root counts, Mertens estimates needed by the
 application, the large-prime-factor estimate, the factorial-collision cover,
 the CRT construction, and the final transference argument are represented in
