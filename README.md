@@ -4,25 +4,7 @@ This repository contains the Lean 4 formalization accompanying Aakash
 Gurung's manuscript *Factorial-residue hypergraphs and an auxiliary problem
 of Erdos*.
 
-## Papers
-
-Manuscript versions are collected in [`Papers/`](Papers/). These version
-numbers refer to the manuscripts, not to versions of the Palomar registration.
-
-| Version | Manuscript | Relation to Palomar |
-| --- | --- | --- |
-| [v1](Papers/v1/) | Original auxiliary-problem paper: [PDF](Papers/v1/factorial_residue_hypergraphs.pdf), [TeX](Papers/v1/factorial_residue_hypergraphs.tex) | Its quantitative auxiliary theorem is the result covered by Palomar v1, conditional on the explicitly stated standard upper-bound sieve theorem. |
-| [v2](Papers/v2/) | Expanded working draft: [PDF](Papers/v2/factorial_residue_covers_expanded.pdf), [TeX](Papers/v2/factorial_residue_covers_expanded.tex) | Contains additional results that are not covered by the existing registration. |
-
-The v1 copy omits the byline and affiliation and has a corrected AI
-disclosure; its mathematical text is unchanged from the manuscript in the
-registered commit. The exact archived
-source is linked in [`Papers/v1/README.md`](Papers/v1/README.md).
-The current expanded draft is v2. It has no author byline and retains the
-AI disclosure; its [finite examples and checkers](Papers/v2/README.md) are
-included. Later manuscript revisions will use v3, v4, and so on.
-Updating a manuscript does not change the pinned Palomar record or extend
-the scope of its machine checks.
+Manuscript PDFs, TeX sources, and version notes are in [`Papers/`](Papers/).
 
 ## Result submitted to Palomar
 
@@ -110,8 +92,6 @@ result uses only `propext`, `Classical.choice`, and `Quot.sound`.
   and the three permitted axioms.
 - [`formalization.yaml`](formalization.yaml) records provenance, scope,
   automation, fidelity, classifications, and review status.
-- [`Papers/`](Papers/) contains the versioned manuscripts. The quantitative
-  auxiliary theorem in [`Papers/v1/`](Papers/v1/) is the one formalized here.
 - [`docs/VERIFICATION.md`](docs/VERIFICATION.md) records the independent archive
   and build audit.
 - [`docs/PRESUBMISSION_REFEREE_AUDIT.md`](docs/PRESUBMISSION_REFEREE_AUDIT.md)
