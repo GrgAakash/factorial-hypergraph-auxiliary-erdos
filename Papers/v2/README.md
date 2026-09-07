@@ -1,6 +1,7 @@
-# Factorial-residue hypergraphs and covering congruences
+# v2 — Factorial-residue hypergraphs and covering congruences
 
-**Working draft — exposition and mathematical review in progress.**
+**When the manuscript has been fully edited and revised by humans, it will be marked "Final Version".**
+This version is a working draft, not a final version.
 Last updated: 7 September 2026.
 
 - [Read the PDF](factorial_residue_covers_expanded.pdf).
@@ -16,9 +17,10 @@ dimension-one upper-bound sieve theorem. The additional results in this
 expanded draft, including the stronger counting bound in prescribed
 progressions, are not covered by that registration and require separate
 mathematical review. No new Lean verification is claimed for this draft.
+The completed machine checks of the registered formalization remain a
+separate record and do not cover these additional results.
 
-The original manuscript used by the formalization is preserved separately
-in [`../factorial_residue_hypergraphs.tex`](../factorial_residue_hypergraphs.tex).
+The original manuscript is available in [`v1`](../v1/).
 The registered source commit remains unchanged.
 
 ## Build the PDF

@@ -1,29 +1,31 @@
 # Factorial-residue hypergraphs and an auxiliary problem of Erdos
 
+**When the manuscript has been fully edited and revised by humans, it will be marked "Final Version".**
+Neither manuscript version below is currently marked final.
+
 This repository contains the Lean 4 formalization accompanying Aakash
 Gurung's manuscript *Factorial-residue hypergraphs and an auxiliary problem
 of Erdos*.
 
-## Current working draft
+## Papers
 
-**Working draft — exposition and mathematical review in progress.**
-Last updated: 7 September 2026.
+Manuscript versions are collected in [`Papers/`](Papers/). These version
+numbers refer to the manuscripts, not to versions of the Palomar registration.
 
-The expanded manuscript, *Factorial-residue hypergraphs and covering
-congruences*, is available as a
-[PDF](paper/working-draft/factorial_residue_covers_expanded.pdf) and
-[TeX source](paper/working-draft/factorial_residue_covers_expanded.tex).
-It has no author byline while exposition and review continue; the AI
-disclosure is retained. The accompanying
-[finite examples and checkers](paper/working-draft/README.md) are also included.
+| Version | Manuscript | Relation to Palomar |
+| --- | --- | --- |
+| [v1](Papers/v1/) | Original auxiliary-problem paper: [PDF](Papers/v1/factorial_residue_hypergraphs.pdf), [TeX](Papers/v1/factorial_residue_hypergraphs.tex) | Its quantitative auxiliary theorem is the result covered by Palomar v1, conditional on the explicitly stated standard upper-bound sieve theorem. |
+| [v2](Papers/v2/) | Expanded working draft: [PDF](Papers/v2/factorial_residue_covers_expanded.pdf), [TeX](Papers/v2/factorial_residue_covers_expanded.tex) | Contains additional results that are not covered by the existing registration. |
 
-The expanded draft contains additional results beyond the registered
-formalization. Palomar v1 covers the original quantitative auxiliary theorem,
-conditional on the explicitly stated standard upper-bound sieve theorem;
-it does not certify all results in this expanded manuscript. The original
-manuscript referenced by the formalization remains at
-[`paper/factorial_residue_hypergraphs.tex`](paper/factorial_residue_hypergraphs.tex).
-Updating this working draft does not change the registered commit.
+The v1 copy omits the byline and affiliation and has a corrected AI
+disclosure; its mathematical text is unchanged from the manuscript in the
+registered commit. The exact archived
+source is linked in [`Papers/v1/README.md`](Papers/v1/README.md).
+The current expanded draft is v2. It has no author byline and retains the
+AI disclosure; its [finite examples and checkers](Papers/v2/README.md) are
+included. Later manuscript revisions will use v3, v4, and so on.
+Updating a manuscript does not change the pinned Palomar record or extend
+the scope of its machine checks.
 
 ## Result submitted to Palomar
 
@@ -111,8 +113,8 @@ result uses only `propext`, `Classical.choice`, and `Quot.sound`.
   and the three permitted axioms.
 - [`formalization.yaml`](formalization.yaml) records provenance, scope,
   automation, fidelity, classifications, and review status.
-- [`paper/factorial_residue_hypergraphs.tex`](paper/factorial_residue_hypergraphs.tex)
-  is the mathematical manuscript formalized here.
+- [`Papers/`](Papers/) contains the versioned manuscripts. The quantitative
+  auxiliary theorem in [`Papers/v1/`](Papers/v1/) is the one formalized here.
 - [`docs/VERIFICATION.md`](docs/VERIFICATION.md) records the independent archive
   and build audit.
 - [`docs/PRESUBMISSION_REFEREE_AUDIT.md`](docs/PRESUBMISSION_REFEREE_AUDIT.md)
@@ -157,9 +159,12 @@ New formalizations can be submitted through the
 Aakash Gurung directed the project and takes responsibility for the
 mathematical result.  Mathematical exploration, manuscript preparation, and
 Lean formalization were AI-assisted using OpenAI ChatGPT, Codex, and Aristotle
-(Harmonic).  The resulting formalization was rebuilt and audited for
-compilation, theorem scope, and assumptions.  No independent human expert Lean
-review has yet been conducted.
+(Harmonic).
+
+No independent human expert Lean review has yet been conducted.
+
+The completed machine-verification results and their scope are recorded
+under [Formal verification](#formal-verification) above.
 
 ## Licence
 

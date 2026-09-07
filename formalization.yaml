@@ -27,13 +27,15 @@ sources:
     authors:
       - "Aakash Gurung"
     type: paper
-    location: "paper/factorial_residue_hypergraphs.tex"
+    location: "Papers/v1/factorial_residue_hypergraphs.tex"
     relationship: formalizes
     note: >-
       This repository formalizes the manuscript's quantitative auxiliary
       theorem. The Lean theorem carries the standard upper-bound sieve as an
       explicit hypothesis because the fundamental lemma is not in the pinned
-      Mathlib release.
+      Mathlib release. This v1 manuscript copy omits the byline and
+      affiliation and has a corrected AI disclosure; its mathematical text
+      is unchanged from the registered source commit.
     license: "Apache-2.0"
     author_endorsement: participated
   - title: "Unsolved Problems in Number Theory, third edition, Problem A2"
@@ -85,6 +87,8 @@ status:
     this changes only a sufficiently-large-L threshold and not the compared
     conclusion. The original prime form of Erdos Problem 1059 remains open and
     is outside the formalized claim.
+    The expanded manuscript in Papers/v2 contains additional
+    results that are outside this registered formalization.
   sorry_count: 0
   sorry_in_definitions: 0
   axioms: [propext, Classical.choice, Quot.sound]
@@ -131,9 +135,10 @@ automation:
   notes: >-
     The mathematical manuscript was developed through a human-directed
     pipeline/one-shot workflow. Aristotle produced and extended the Lean
-    development. The author directed the target, reviewed the mathematical
-    argument, and is responsible for the submitted result. Codex performed an
-    independent clean build and packaging audit of the supplied archive.
+    development. The author directed the target and is responsible for the
+    submitted result.
+    Codex performed an independent clean build and packaging audit of the
+    supplied archive.
 
 fidelity:
   divergences: >-
@@ -157,7 +162,7 @@ fidelity:
     solve Erdos Problem 1059.
 
 review:
-  status: "agent-reviewed and author-supervised"
+  status: "agent-reviewed"
   reviewers:
     - "Aristotle proof and dependency audit"
     - "OpenAI Codex independent archive and build audit"
@@ -177,11 +182,13 @@ review:
     Palomar compliance; their reconciled report is in
     docs/PRESUBMISSION_REFEREE_AUDIT.md. No independent human expert Lean review
     is claimed.
+    The completed machine checks concern the registered formalization and
+    do not extend to the additional results in Papers/v2.
 
 alignment:
   namespace: "FactorialHypergraph.Palomar"
   statements:
-    - source: "Theorem 1.2 of paper/factorial_residue_hypergraphs.tex"
+    - source: "Theorem 1.2 of Papers/v1/factorial_residue_hypergraphs.tex"
       lean: "FactorialHypergraph.Palomar.quantitative_auxiliary_erdos"
       module: "Solution"
       status: adapted
