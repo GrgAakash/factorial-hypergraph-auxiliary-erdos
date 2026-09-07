@@ -1,5 +1,7 @@
 # Factorial-residue hypergraphs and an auxiliary problem of Erdos
 
+[![Palomar CI](https://github.com/GrgAakash/factorial-hypergraph-auxiliary-erdos/actions/workflows/ci.yml/badge.svg?branch=main&event=push)](https://github.com/GrgAakash/factorial-hypergraph-auxiliary-erdos/actions/workflows/ci.yml)
+
 This repository contains the Lean 4 formalization accompanying Aakash
 Gurung's manuscript *Factorial-residue hypergraphs and an auxiliary problem
 of Erdos*.
