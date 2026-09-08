@@ -124,9 +124,7 @@ GitHub Actions runs the metadata, licence, Lean build, and Comparator checks.
 
 This formalization is registered in the Palomar Registry as
 [PALOMAR-2026-08-27-000003 v1](https://palomar-registry.org/entry.html?id=PALOMAR-2026-08-27-000003&version=1).
-The registered record pins commit
-`67b4088fc84422c84f7e5e205552757c3c0c9a71`; its Lean, Comparator, and
-NanoDa checks succeeded.
+Its Comparator, Lean kernel, and NanoDa checks succeeded.
 
 Palomar is a registry of machine-checked results, not a journal or a substitute
 for expert mathematical peer review.
