@@ -2,9 +2,9 @@
 
 [![Palomar CI](https://github.com/GrgAakash/factorial-hypergraph-auxiliary-erdos/actions/workflows/ci.yml/badge.svg?branch=main&event=push)](https://github.com/GrgAakash/factorial-hypergraph-auxiliary-erdos/actions/workflows/ci.yml)
 
-This repository contains the Lean 4 formalization accompanying Aakash
-Gurung's manuscript *Factorial-residue hypergraphs and an auxiliary problem
-of Erdos*.
+This repository preserves the AI-assisted IPAM/RIPS project
+*Factorial-residue hypergraphs and an auxiliary problem of Erdos*, together
+with its registered Lean 4 formalization.
 
 Manuscript PDFs, TeX sources, and version notes are in [`Papers/`](Papers/).
 
@@ -31,8 +31,9 @@ for every `L >= L0`.
 
 This gives a quantitative form of an auxiliary question that Erdos suggested
 alongside Problem 1059.  It is not the original prime problem: the constructed
-integer `n` need not be prime.  The original question asking for infinitely
-many prime `p` such that every relevant `p-k!` is composite remains open.
+integer `n` need not be prime. The original question asks for infinitely
+many prime `p` such that every relevant `p-k!` is composite; that result is
+not claimed here.
 
 ## Exact formal status
 

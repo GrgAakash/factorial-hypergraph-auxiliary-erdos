@@ -1,7 +1,7 @@
 # v1 — Factorial-residue hypergraphs and an auxiliary problem of Erdős
 
-**When the manuscript has been fully edited and revised by humans, it will be marked "Final Version".**
-This version is not marked final.
+This is the retained AI-assisted manuscript, with an editorial revision
+dated 29 September 2026. It is not presented as a final, human-reviewed paper.
 
 - [Read the PDF](factorial_residue_hypergraphs.pdf).
 - [TeX source](factorial_residue_hypergraphs.tex).
@@ -12,13 +12,15 @@ registered Lean declaration covers its quantitative auxiliary theorem,
 conditional on the explicit standard dimension-one upper-bound sieve
 hypothesis. It does not prove the original prime problem.
 
-The mathematical text of this copy is unchanged from the registered source.
-Its AI-disclosure paragraph has been corrected to remove a claim of completed
-human verification. The byline, affiliation, and PDF author metadata have
-also been removed from this draft copy, as in the expanded [v2](../v2/).
+The theorem statements and mathematical argument are retained. The current
+copy has clearer introductory explanations, simpler section headings,
+corrected punctuation, and revised page spacing. The byline, affiliation,
+and PDF author metadata are omitted. The AI disclosure is retained, without
+a claim of completed human verification.
 For the exact historical snapshot, see the
 [source at registered commit `67b4088`](https://github.com/GrgAakash/factorial-hypergraph-auxiliary-erdos/blob/67b4088fc84422c84f7e5e205552757c3c0c9a71/paper/factorial_residue_hypergraphs.tex).
-Moving this copy into `Papers/v1` does not change that pinned record.
+The editorial revision does not change that pinned record, the Lean source,
+or the scope of the registered theorem. It is not a new proof audit.
 
 ## Build the PDF
 

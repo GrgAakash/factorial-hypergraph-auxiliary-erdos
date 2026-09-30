@@ -1,8 +1,11 @@
 \documentclass[11pt]{amsart}
 
 \usepackage{amsmath,amssymb,mathtools}
+\usepackage[margin=1.15in]{geometry}
 \usepackage{microtype}
 \usepackage[hidelinks]{hyperref}
+\raggedbottom
+\setlength{\emergencystretch}{1.5em}
 
 \hypersetup{
   pdftitle={Factorial-residue hypergraphs and an auxiliary problem of Erdos},
@@ -30,8 +33,9 @@
 \begin{document}
 
 \begin{abstract}
-For $L\geq2$, we associate a weighted edge-colored multihypergraph with the
-factorial residues modulo primes $q>L$.  We prove that the minimum weight
+We study covering congruences obtained by grouping factorials that have the
+same residue modulo a prime.  For $L\geq2$, these groups form a weighted
+edge-colored multihypergraph.  We prove that the minimum weight
 $\kappa(L)$ of a rainbow edge cover is at most $(1-\delta)L\log L$ for some
 absolute $\delta>0$ and all sufficiently large $L$.  This minimum is the
 logarithm of the least modulus arising from the corresponding system of
@@ -40,9 +44,9 @@ constants $\eta>0$ and $L_0$ such that, for every $L\geq L_0$, at least
 \[
 \frac{((L+1)!)^\eta}{100\log L}
 \]
-integers $n\in(2L!,(L+1)!]$ satisfy $P^-(n)>L$ and have $n-k!$ composite
-for every $1\leq k\leq L$.  This gives a quantitative solution of an
-auxiliary problem of Erd\H{o}s.
+integers $n\in(2L!,(L+1)!]$ have all prime factors greater than $L$, with
+$n-k!$ composite for every $1\leq k\leq L$.  This gives a quantitative
+solution of an auxiliary problem of Erd\H{o}s.
 \end{abstract}
 
 \maketitle
@@ -52,7 +56,8 @@ auxiliary problem of Erd\H{o}s.
 Guy \cite[Problem A2]{Guy} records the following question of Erd\H{o}s: are
 there infinitely many primes $p$ such that $p-k!$ is composite whenever
 $1\leq k!<p$?  The primes $101$ and $211$ are examples.  This question is
-also listed as Erd\H{o}s Problem 1059 and remains open \cite{Bloom}.
+also listed as Erd\H{o}s Problem 1059; at the time of writing, the public
+problem page lists it as open \cite{Bloom}.
 
 Alongside Problem 1059, Erd\H{o}s suggested the following easier auxiliary
 problem \cite[Problem A2]{Guy}: prove that there are infinitely many pairs
@@ -66,13 +71,17 @@ every $1\leq k\leq L$.
 We prove this auxiliary problem in a quantitative form.  For an integer
 $n>1$, let $P^-(n)$ and $P^+(n)$ denote its least and greatest prime factors,
 respectively.  We call $n$ \emph{$L$-rough} if $P^-(n)>L$.
+This condition excludes small prime divisors but allows $n$ to be composite.
 
-The proof begins with a weighted edge-colored multihypergraph on the vertex
-set $\{2,\ldots,L\}$.  Whenever several factorials have the same nonzero
-residue modulo a prime $q>L$, their indices form an edge of color $q$ and
-weight $\log q$.  Let $\kappa(L)$ be the minimum weight of a rainbow edge
-cover, where rainbow means that no two selected edges have the same color.
-The precise definition is given in Section~2.
+The main idea is to use one congruence to make several factorial differences
+composite.  If several factorials have the same residue modulo a prime,
+requiring $n$ to have that residue makes each of the corresponding differences
+divisible by the prime.  We record these groups in a weighted edge-colored
+multihypergraph on $\{2,\ldots,L\}$.  An edge has color $q$ and weight
+$\log q$ when its factorials share a nonzero residue modulo $q$, where
+$L<q<L!$.  Let $\kappa(L)$ be the minimum weight of a rainbow edge cover:
+the selected edges cover all vertices and use each prime color at most once.
+Section~2 gives the precise definitions and explains the restrictions on $q$.
 
 \begin{theorem}\label{thm:covercost}
 There are absolute constants $\delta>0$ and $L_0$ such that
@@ -82,10 +91,11 @@ There are absolute constants $\delta>0$ and $L_0$ such that
 for every integer $L\geq L_0$.
 \end{theorem}
 
-The quantity $\kappa(L)$ has an exact arithmetic meaning: it is the
-logarithm of the least modulus arising from a system of covering
-congruences of the prescribed form.  Thus, Theorem~\ref{thm:covercost}
-gives a fixed proportional saving at the $L\log L$ scale.
+The weight of a cover is the logarithm of the product of its primes, which
+is the modulus in the Chinese remainder theorem.  Thus $\kappa(L)$ is the
+logarithm of the least modulus obtainable from these covering congruences.
+Theorem~\ref{thm:covercost} saves a fixed proportion of the leading cost of
+covering the indices separately.  This saving gives the following result.
 
 \begin{theorem}\label{thm:main}
 There are absolute constants $\eta>0$ and $L_1$ such that, for every integer
@@ -100,21 +110,29 @@ every $1\leq k\leq L$.
 In particular, solutions of the auxiliary problem exist for every
 sufficiently large $L$.  They lie in the smaller interval
 $(2L!,(L+1)!]$.  The theorem does not say that any of these integers is
-prime, so it does not solve Erd\H{o}s Problem 1059.
+prime.  The original prime problem is not addressed here.
 
 Factorial residues modulo a fixed prime have been studied from the viewpoints
 of value sets and distribution; see, for example,
 \cite{BanksLucaShparlinskiStichtenoth,GaraevLucaShparlinski,
-KlurmanMunsch,Hu}.  Here the prime varies with the edge.  An auxiliary
-conflict graph separates the combinatorial selection of a rainbow subfamily
-from the arithmetic problem of producing sufficiently many low-weight
-edges.
+GrebennikovSagdeevSemchankauVasilevskii,KlurmanMunsch,Hu}.  A public
+AI-assisted working report gives a related congruence-cover formulation for
+the original prime problem and explains why a fixed modulus cannot settle it
+\cite{WhiteClaude}; it does not prove the auxiliary theorem established here.
+Here we use several primes to cover the indices.  We first find many pairs of
+factorials that agree modulo suitable primes, then select pairs with distinct
+primes and no repeated index.
 
-For the unconditional estimate, we use collisions of gap two.  The basic
-identity is
+To prove Theorem~\ref{thm:covercost}, we use factorials two indices apart.
+The basic identity is
 \begin{equation}\label{eq:keyidentity}
 (i+2)!-i!=i!\bigl(i^2+3i+1\bigr).
 \end{equation}
+The same quadratic, together with the observation that its roots modulo
+primes are governed by its discriminant $5$, appeared earlier in a
+Math StackExchange discussion of
+$\gcd(n!+1,(n+2)!+1)$ \cite{Israel}.  Here it is used to produce many
+low-weight factorial collisions and a uniform sieve construction.
 If a prime $q>i+2$ divides $i^2+3i+1$, then one fiber modulo $q$ contains
 both $i$ and $i+2$.  A product argument and a one-dimensional upper-bound
 sieve give linearly many candidate fibers with
@@ -127,12 +145,22 @@ remaining vertices are covered separately by primes of size $O(L\log L)$.
 The paired fibers save a fixed multiple of $L\log L$, which proves
 Theorem~\ref{thm:covercost}.
 
-We then prove a general transference theorem.  Any rainbow edge cover whose
-modulus is at most $((L+1)!)^{1-\eta}$ produces many integers in one CRT
-progression.  Counting reduced residue classes modulo the primorial
+We then count integers in the progression given by the Chinese remainder
+theorem.  A rainbow edge cover with modulus at most $((L+1)!)^{1-\eta}$
+leaves enough integers in this progression to exclude all small prime
+divisors.  Counting reduced residue classes modulo the primorial
 $\prod_{p\leq L}p$ yields the $L$-rough integers.  The restrictions
 $q<L!$ and $n>2L!$ make every selected divisor of $n-k!$ proper, and the
 case $k=1$ follows from parity.  This gives Theorem~\ref{thm:main}.
+
+Section~2 relates the covers to congruences.  Sections~3 and~4 provide the
+estimates for the prime divisors used in the construction, which is carried
+out in Section~5.  Section~6 counts the resulting rough integers.
+
+We write $\pi(x)$ for the number of primes at most $x$, $\omega(m)$ for the
+number of distinct prime divisors of $m$, $\tau(m)$ for its number of
+positive divisors, and $\varphi(m)$ for Euler's totient function.  All
+logarithms are natural.
 
 \section{The factorial-residue hypergraph}
 
@@ -180,6 +208,10 @@ $\kappa(L)=+\infty$ if none exists.
 
 The rainbow condition is necessary because choosing two different fibers of
 the same color would impose incompatible residues modulo the same prime.
+The lower bound on $q$ ensures that none of the factorial residues is zero.
+The upper bound will ensure that the selected divisor of each factorial
+difference is proper.  We omit the index $1$ because the difference $n-1$
+will be composite by parity.
 
 \begin{proposition}[Collision criterion]\label{prop:criterion}
 Let $2\leq i<j\leq L$ and let $q>L$ be prime.  Then
@@ -203,8 +235,7 @@ Also, $q>L\geq i$, so $q\nmid i!$.  We may therefore cancel $i!$ modulo
 $q$.  The three conditions are now equivalent.
 \end{proof}
 
-The next proposition proves that the scale $L\log L$ is the natural
-singleton baseline.
+Covering each index with a separate prime gives the following initial bound.
 
 \begin{proposition}\label{prop:baseline}
 For every sufficiently large $L$,
@@ -328,8 +359,8 @@ gives the last assertion.  Independence gives distinct prime colors and
 pairwise disjoint designated subsets by the definition of the conflict graph.
 \end{proof}
 
-Relative to the leading weight $|B_F|\log L$ of $|B_F|$ singleton edges, an
-edge of color $q$ yields a power saving only when
+Covering the indices in $B_F$ separately has leading cost $|B_F|\log L$.
+Using one prime $q$ instead saves a fixed multiple of $\log L$ when
 $q\leq L^{|B_F|-\varepsilon}$ for some $\varepsilon>0$.  In the quadratic
 construction $|B_F|=2$, which explains the range $q\ll L^{2-\alpha}$.
 
@@ -343,16 +374,19 @@ f(t)=t^2+3t+1.
 
 \subsection{Local root counts}
 
-We also let $\chi_5$ be the primitive quadratic character modulo $5$, and we
-extend it by setting $\chi_5(5)=0$.  We will use the prime number theorem, the
+Let $\chi_5$ be the primitive quadratic character modulo $5$, and extend it
+by setting $\chi_5(5)=0$.  We will use the prime number theorem, the
 Siegel--Walfisz theorem for the fixed modulus $5$, and Mertens's estimates in
 the forms stated in
 \cite[Theorems 3.4, 8.1 and 12.1]{Koukoulopoulos}.  Let
 \[
 \Theta_{\chi_5}(x)=\sum_{p\leq x}\chi_5(p)\log p.
 \]
-For $a\in(\mathbb Z/5\mathbb Z)^\times$, the fixed-modulus Siegel--Walfisz
-estimate for $\pi(x;5,a)$ and partial summation give
+For $a\in(\mathbb Z/5\mathbb Z)^\times$, write
+\[
+\vartheta(x;5,a)=\sum_{\substack{p\leq x\\ p\equiv a\pmod 5}}\log p.
+\]
+The fixed-modulus Siegel--Walfisz estimate and partial summation give
 $\vartheta(x;5,a)=x/4+O(xe^{-c\sqrt{\log x}})$ for some $c>0$.  Since the
 sum of $\chi_5(a)$ over these four classes is zero, summing with weights
 $\chi_5(a)$ gives
@@ -417,8 +451,8 @@ For all sufficiently large $N$,
 \end{lemma}
 
 \begin{proof}
-Let $E_N$ denote the set of indices for which all prime factors of $f(i)$
-are small, and define
+We first bound the number of indices for which every prime factor of $f(i)$
+is at most $i$.  Put
 \[
 E_N=\left\{i:\frac{N}{\log N}<i\leq N,\ P^+(f(i))\leq i\right\},
 \qquad
@@ -507,12 +541,12 @@ satisfy the required inequality.  This proves the lemma.
 
 \section{A sieve estimate for the complementary factor}
 
-A large prime divisor of $f(i)$ is useful only if its complementary factor
-is not too small, since otherwise the prime is too costly for the covering
-modulus.  Write $f(i)=mq$, where $q>L$ is prime.  We show that $m$ is not too
-small for most of the indices under consideration.
+Write $f(i)=mq$, where $q>L$ is prime.  To save on the covering modulus, we
+also need an upper bound on $q$, or equivalently a lower bound on its
+complementary factor $m$.  We now bound the number of indices for which $m$
+is too small.
 
-\subsection{Sieve setup}
+\subsection{Root classes and local counts}
 
 For $0<\alpha\leq1/2$, let
 \[
@@ -524,8 +558,8 @@ E_\alpha(L)
 \right\}.
 \]
 Thus, $E_\alpha(L)$ counts the indices for which a prime factor $q>L$ has a
-complementary factor $m\leq L^\alpha$.  The next lemma says that this bad set
-is small when $\alpha$ is small.
+complementary factor $m\leq L^\alpha$.  The next lemma bounds this count
+uniformly in $\alpha$.
 
 \begin{lemma}\label{lem:smallcofactor}
 There is an absolute constant $C_0\geq1$ such that, uniformly for $0<\alpha\leq1/2$ and all sufficiently large $L$,
@@ -592,8 +626,8 @@ Since $m\mid f(a)$, we can divide $f(a+mt)$ by $m$ and obtain the integral
 polynomial
 \[
     G_{a,m}(t)=\frac{f(a+mt)}m
-  =mt^2+(2a+3)t+\frac{f(a)}m
-  .\]
+  =mt^2+(2a+3)t+\frac{f(a)}m.
+\]
 This polynomial has discriminant $5$.  It is also primitive.  Indeed, if a
 prime divided all three coefficients, then its square would divide
 $(2a+3)^2-4f(a)=5$, which is impossible.
@@ -622,7 +656,8 @@ counting the root classes inside $T_{a,m}$ gives
 
 \subsection{Application of the fundamental lemma}
 
-The constants in the fundamental lemma must be uniform in $m$ and $a$.
+We check that the constants in the fundamental lemma can be chosen
+independently of $m$ and $a$.
 Define the nonnegative weights
   \[
   a_n=\#\{t\in T_{a,m}:G_{a,m}(t)=n\},
@@ -710,7 +745,7 @@ V_m(z)=
 \prod_{\substack{\ell\leq z\\ \ell\nmid10m}}
 \left(1-\frac{\rho(\ell)}\ell\right).
 \]
-The remainder is easy to control because $\rho(d)\leq\tau(d)$.  Hence,
+To bound the remainder, we use $\rho(d)\leq\tau(d)$.  Hence,
 \[
 \sum_{d\leq H^{1/2}}\rho(d)
 \leq\sum_{ab\leq H^{1/2}}1
@@ -810,8 +845,8 @@ Finally,
   \[
   \log(2Y)\leq\alpha\log L+O(1),
   \]
-uniformly for $0<\alpha\leq1/2$.  Substitution of these bounds into
-\eqref{eq:Esum}.  This gives
+uniformly for $0<\alpha\leq1/2$.  Substituting these bounds into
+\eqref{eq:Esum} gives
   \[
   E_\alpha(L)
   \ll \alpha L+\frac{L}{\log L}
@@ -821,7 +856,7 @@ with an absolute implied constant and an $L$-threshold independent of
 $\alpha$.  This proves the lemma.
 \end{proof}
 
-\section{A low-weight rainbow cover from quadratic congruences}
+\section{Construction of the cover}
 
 Lemmas~\ref{lem:largeprime} and \ref{lem:smallcofactor} provide the required
 arithmetic input.  The following proposition extracts a family of disjoint
@@ -841,7 +876,7 @@ For every sufficiently large $L$, there exist a set
 $I\subseteq\{2,\ldots,L-2\}$, distinct primes $q_i$ for $i\in I$, and
 distinct primes $r_k$, indexed by
 \[
-U=\{2,\ldots,L\}\setminus\bigcup_{i\in I}\{i,i+2\},
+U=\{2,\ldots,L\}\setminus\bigcup_{i\in I}\{i,i+2\}.
 \]
 Put
 \[
@@ -998,6 +1033,7 @@ This completes the construction.
 \end{proof}
 
 \begin{proof}[Proof of Theorem~\ref{thm:covercost}]
+\enlargethispage{\baselineskip}
 Choose the sets and primes from Proposition~\ref{prop:quadratic-cover}.  For
 each $i\in I$, the identity \eqref{eq:keyidentity} and the divisibility
 $q_i\mid f(i)$ give
@@ -1017,8 +1053,8 @@ Taking $\delta=\delta_0$ proves the theorem.
 
 \section{From rainbow covers to rough integers}
 
-The following transference theorem applies to any rainbow edge cover with a
-power-saving modulus.
+Once a cover has been found, the following theorem counts rough integers in
+the corresponding progression.  Only the size of the modulus is needed.
 
 \begin{theorem}[Transference theorem]\label{thm:transference}
 Fix $0<\eta<1$.  For every sufficiently large $L$, depending only on
@@ -1157,6 +1193,7 @@ Theorem~\ref{thm:transference} now gives the result after increasing the
 absolute threshold $L_1$ if necessary.
 \end{proof}
 
+\clearpage
 \section{Concluding remarks}
 
 The hypergraph $\mathcal H_L$ is not tied to gap two.  By
@@ -1187,9 +1224,11 @@ during the project.
 \section*{Declaration of generative AI and AI-assisted technologies in the
 manuscript preparation process}
 
-During the research and preparation of this work, the author used OpenAI's
-ChatGPT and Codex for exploratory work, computation, literature searches,
-algebraic checks, proof organization, and editorial revision.
+OpenAI's ChatGPT and Codex were used extensively during the research and
+preparation of this work for mathematical exploration, computation,
+literature searches, algebraic checks, proof organization, and editorial
+revision.  Aristotle (Harmonic) was used for the accompanying Lean
+formalization.
 \begin{thebibliography}{99}
 
 \bibitem{BanksLucaShparlinskiStichtenoth}
@@ -1201,34 +1240,60 @@ Turkish J. Math. \textbf{29} (2005), no.~2, 169--174.
 T.~F. Bloom,
 \emph{Erd\H{o}s Problem 1059},
 \href{https://www.erdosproblems.com/1059}
-{erdosproblems.com/1059}, accessed August 9, 2026.
+{erdosproblems.com/1059}, accessed September 29, 2026.
 
 \bibitem{GaraevLucaShparlinski}
 M.~Z. Garaev, F.~Luca, and I.~E. Shparlinski,
 \emph{Exponential sums and congruences with factorials},
-J. Reine Angew. Math. \textbf{584} (2005), 29--44.
+J. Reine Angew. Math. \textbf{584} (2005), 29--44,
+\href{https://doi.org/10.1515/crll.2005.2005.584.29}
+{doi:10.1515/crll.2005.2005.584.29}.
+
+\bibitem{GrebennikovSagdeevSemchankauVasilevskii}
+A.~Grebennikov, A.~Sagdeev, A.~Semchankau, and A.~Vasilevskii,
+\emph{On the sequence $n!\bmod p$},
+Rev. Mat. Iberoam. \textbf{40} (2024), no.~2, 637--648,
+\href{https://doi.org/10.4171/RMI/1422}{doi:10.4171/RMI/1422}.
 
 \bibitem{Guy}
 R.~K. Guy,
 \emph{Unsolved Problems in Number Theory},
 3rd ed., Problem Books in Mathematics, Springer, New York, 2004,
-Problem A2, pp.~10--12.
+Problem A2, pp.~10--12,
+\href{https://doi.org/10.1007/978-0-387-26677-0}
+{doi:10.1007/978-0-387-26677-0}.
 
 \bibitem{Hu}
 X.~Hu,
 \emph{Factorial residues modulo a prime: beyond the square-root bound},
 \href{https://arxiv.org/abs/2608.01781}{arXiv:2608.01781} (2026).
 
+\bibitem{Israel}
+R.~Israel,
+\emph{Answer to ``When are $n!+1$ and $(n+2)!+1$ coprime?''},
+Mathematics Stack Exchange, December 22, 2023,
+\href{https://math.stackexchange.com/questions/4832101/when-are-n1-and-n21-coprime}
+{math.stackexchange.com/questions/4832101}, accessed September 29, 2026.
+
 \bibitem{KlurmanMunsch}
 O.~Klurman and M.~Munsch,
 \emph{Distribution of factorials modulo $p$},
-J. Th\'eor. Nombres Bordeaux \textbf{29} (2017), no.~1, 169--177.
+J. Th\'eor. Nombres Bordeaux \textbf{29} (2017), no.~1, 169--177,
+\href{https://doi.org/10.5802/jtnb.974}{doi:10.5802/jtnb.974}.
 
 \bibitem{Koukoulopoulos}
 D.~Koukoulopoulos,
 \emph{The Distribution of Prime Numbers},
 Graduate Studies in Mathematics, vol.~203,
-American Mathematical Society, Providence, RI, 2019.
+American Mathematical Society, Providence, RI, 2019,
+\href{https://doi.org/10.1090/gsm/203}{doi:10.1090/gsm/203}.
+
+\bibitem{WhiteClaude}
+P.~White, with Claude (Anthropic),
+\emph{Erd\H{o}s problem 1059---wave6t report},
+Erd\H{o}s Problem a Day, July 27, 2026,
+\href{https://www.erdosproblemaday.com/report/1059}
+{erdosproblemaday.com/report/1059}, accessed September 29, 2026.
 
 \end{thebibliography}
 

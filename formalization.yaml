@@ -34,8 +34,11 @@ sources:
       theorem. The Lean theorem carries the standard upper-bound sieve as an
       explicit hypothesis because the fundamental lemma is not in the pinned
       Mathlib release. This v1 manuscript copy omits the byline and
-      affiliation and has a corrected AI disclosure; its mathematical text
-      is unchanged from the registered source commit.
+      affiliation and retains the AI disclosure. Its exposition and layout
+      have been revised; the theorem statements and mathematical argument
+      are retained. The exact registered source remains at commit
+      67b4088fc84422c84f7e5e205552757c3c0c9a71 under
+      paper/factorial_residue_hypergraphs.tex.
     license: "Apache-2.0"
     author_endorsement: participated
   - title: "Unsolved Problems in Number Theory, third edition, Problem A2"
@@ -85,10 +88,10 @@ status:
     are formalized. The large-prime-factor intermediate estimate used by the
     final proof has threshold constant 1/40 instead of the manuscript's 1/8;
     this changes only a sufficiently-large-L threshold and not the compared
-    conclusion. The original prime form of Erdos Problem 1059 remains open and
-    is outside the formalized claim.
-    The expanded manuscript in Papers/v2 contains additional
-    results that are outside this registered formalization.
+    conclusion. The original prime form of Erdos Problem 1059 is outside
+    the formalized claim. The previously expanded manuscript has been
+    removed from the current repository; its additional claims were not
+    covered by this registration.
   sorry_count: 0
   sorry_in_definitions: 0
   axioms: [propext, Classical.choice, Quot.sound]
@@ -182,8 +185,9 @@ review:
     Palomar compliance; their reconciled report is in
     docs/PRESUBMISSION_REFEREE_AUDIT.md. No independent human expert Lean review
     is claimed.
-    The completed machine checks concern the registered formalization and
-    do not extend to the additional results in Papers/v2.
+    The completed machine checks concern the registered formalization.
+    Subsequent editorial changes to the retained manuscript do not extend
+    their scope or constitute a human proof review.
 
 alignment:
   namespace: "FactorialHypergraph.Palomar"
